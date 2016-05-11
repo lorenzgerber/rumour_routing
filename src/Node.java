@@ -14,18 +14,36 @@ import java.util.Queue;
 public class Node
 {
 
-    private Position position;
-    private int probAgent;
-    private int periodQuery;
+    public Position position;
+    private double probAgent;
+    public int periodQuery;
     private int nodeId;
-    private ArrayList<Integer> neighbourIds;
+    private ArrayList<Node> neighbourIds;
     private boolean busyState;
     private Map<Integer, Integer> eventMap;
     private Queue<Message> messageQueue;
 
-    public Node(Position position, int probAgent, int periodQuery)
+    public Node(Position position, double probAgent, int periodQuery)
     {
+        this.neighbourIds = new ArrayList<Node>();
+        this.position = position;
+        this.probAgent = probAgent;
+        this.periodQuery = periodQuery;
 
+    }
+
+
+    /**
+     * Constructor without periodQuery
+     * @param position object of type Position that determines location of Node by x/y coordinates
+     * @param probAgent probability value between 0 and 1. Probability that an agent is created after occurence
+     *                  of an event
+     */
+    public Node(Position position, double probAgent)
+    {
+        this.neighbourIds = new ArrayList<Node>();
+        this.position = position;
+        this.probAgent = probAgent;
     }
 
     public void setPeriodQuery(int period)
@@ -33,9 +51,9 @@ public class Node
 
     }
 
-    public void detectNeighbour()
+    public void detectNeighbour(Node node)
     {
-
+        this.neighbourIds.add(node);
     }
 
     public void detectEvent(Event event)

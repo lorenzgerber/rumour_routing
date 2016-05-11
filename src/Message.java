@@ -30,7 +30,7 @@ public abstract class Message
 
     }
 
-    public void desctructor()
+    public void destructor()
     {
 
     }
