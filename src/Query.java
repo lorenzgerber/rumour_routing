@@ -16,4 +16,24 @@ public class Query
     private Stack<Integer> route;
     private enum status {SEARCH, TRACK, HOMING};
     private Node destNode;
+
+    public Query(int eventId){
+
+    }
+
+    public void queryAction()
+    {
+
+    }
+
+    public boolean checkEvent(Node node)
+    {
+        return false;
+    }
+
+    public void homing()
+    {
+
+    }
+
 }

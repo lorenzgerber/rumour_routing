@@ -11,4 +11,24 @@ public class Agent
 {
     private Map<Event, Node> routingMap;
 
+    public void agentAction()
+    {
+
+    }
+
+    public void updateRoutingMap(Node node)
+    {
+
+    }
+
+    public void updateRecentNodes(Node node)
+    {
+
+    }
+
+    public void incrementEventDistance(Event event)
+    {
+
+    }
+
 }

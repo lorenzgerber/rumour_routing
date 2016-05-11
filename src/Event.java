@@ -9,4 +9,16 @@ public class Event
     private int zeroTime;
     private int distance;
 
+    public Event(int zeroTime)
+    {
+
+    }
+
+    public void increaseDistance()
+    {
+
+    }
+
+
+
 }

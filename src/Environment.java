@@ -11,6 +11,31 @@ public class Environment
 {
     private int time;
     private ArrayList<Node> nodes;
-    private int[] enventIds;
+    private int[] eventIds;
+
+    public Environment()
+    {
+
+    }
+
+    public void neighbourInit()
+    {
+
+    }
+
+    public void advanceTime()
+    {
+
+    }
+
+    public void addNode()
+    {
+
+    }
+
+    public void detectEvent()
+    {
+
+    }
 
 }

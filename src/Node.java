@@ -23,5 +23,45 @@ public class Node
     private Map<Integer, Integer> eventMap;
     private Queue<Message> messageQueue;
 
+    public Node(Position position, int probAgent, int periodQuery)
+    {
+
+    }
+
+    public void setPeriodQuery(int period)
+    {
+
+    }
+
+    public void detectNeighbour()
+    {
+
+    }
+
+    public void detectEvent(Event event)
+    {
+
+    }
+
+    public void makeMove()
+    {
+
+    }
+
+    public void sendMessage()
+    {
+
+    }
+
+    public void receiveMessage(Message message)
+    {
+
+    }
+
+    public void messageAction(Message message)
+    {
+
+    }
+
 
 }

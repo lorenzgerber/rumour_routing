@@ -4,10 +4,36 @@
  * it has travelled. A Message knows it's TTL and it has
  * an array with id's of recent visited Nodes.
  */
-public class Message
+public abstract class Message
 {
     private int steps;
     private int maxSteps;
     private int[] recentNodes;
+
+    public Message(int maxSteps)
+    {
+
+    }
+
+    public void checkTTL()
+    {
+
+    }
+
+    public void addRecentNode(Node node)
+    {
+
+    }
+
+    public void messageAction()
+    {
+
+    }
+
+    public void desctructor()
+    {
+
+    }
+
 
 }
