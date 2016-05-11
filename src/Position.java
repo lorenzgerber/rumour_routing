@@ -1,4 +1,9 @@
-public class Position 
+/**
+ * Coordinate based position for nodes.
+ * Used to calculate the node neighbours
+ * based on distance.
+ */
+public class Position
 {
     private final int x;
     private final int y;

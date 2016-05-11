@@ -1,6 +1,14 @@
+import java.util.Map;
+
 /**
- * Created by loge on 01/05/16.
+ * An Agent is a specialisation of a message. An Agent
+ * spreads information among Nodes. An is instantiated with
+ * a certain probability at nodes after detected events.
+ * An Agent maintains a routing map with 'his' event and all
+ * further events he learns about.
  */
 public class Agent
 {
+    private Map<Event, Node> routingMap;
+
 }
