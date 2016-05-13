@@ -24,6 +24,25 @@ public class RumourRoutingApp
         int QUERY_PERIODICITY   = 400;
         int TIMESTEPS           = 10000;
 
+        if (NODES_X < 1 || NODES_Y < 1)
+            throw new IllegalArgumentException("Sizes of X and Y must be 1 or higher");
+
+        if (NEW_EVENTS > 1 || PROB_AGENT > 1)
+            throw new IllegalArgumentException("probabilities must be 1 or less");
+
+        if (TTL_AGENT < 0 || TTL_QUERY < 0)
+            throw new IllegalArgumentException("TTL's can't be negative");
+
+        if (QUERY_NODES < 0)
+            throw new IllegalArgumentException("Number of querynodes can't be negative");
+
+        if (NODE_RANGE < 0)
+            throw new IllegalArgumentException("Node range can't be negative");
+
+        if (TIMESTEPS < 0 || QUERY_PERIODICITY < 0)
+            throw new IllegalArgumentException("Times must be positive");
+
+
         Environment myEnv = new Environment();
 
         // Create and Position Nodes
