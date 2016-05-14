@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.Random;
 
 /**
  * The environment simulates the real world in which
@@ -11,11 +11,15 @@ public class Environment
 {
     private int time;
     private ArrayList<Node> nodeList;
-    private int[] eventIds;
+    private ArrayList<Event> eventList;
+    private double newEventProb;
+    private int eventCounter = 0;
 
-    public Environment()
+    public Environment(double newEventProb)
     {
         this.nodeList = new ArrayList<Node>();
+        this.eventList = new ArrayList<Event>();
+        this.newEventProb = newEventProb;
 
     }
 
@@ -52,6 +56,7 @@ public class Environment
     public void advanceTime()
     {
         for(Node currentNode : nodeList){
+            randomEvent(currentNode);
             currentNode.makeMove();
         }
         this.time++;
@@ -62,8 +67,24 @@ public class Environment
         this.nodeList.add(node);
     }
 
-    public void detectEvent()
+    /**
+     * This method is called in every advanceTime() step
+     * to randomly create a new event. It takes a Node object
+     * as parameter
+     * @param node  Node for which to randomly create an event
+     */
+    public void randomEvent(Node node)
     {
+        Random generator;
+        int oneOutOf = (int) (1 / this.newEventProb);
+        generator = new Random();
+        if(generator.nextInt(oneOutOf) == 1){
+
+            Event newEvent = new Event(this.eventCounter, this.time);
+            this.eventList.add(newEvent);
+            node.detectEvent(newEvent);
+            this.eventCounter++;
+        }
 
     }
 

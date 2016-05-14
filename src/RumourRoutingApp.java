@@ -11,7 +11,6 @@ public class RumourRoutingApp
     {
 
         // Setting Parameters
-
         int NODES_X             = 50;
         int NODES_Y             = 50;
         int NO_NODES            = NODES_X * NODES_Y;
@@ -23,6 +22,11 @@ public class RumourRoutingApp
         int QUERY_NODES         = 4;
         int QUERY_PERIODICITY   = 400;
         int TIMESTEPS           = 10000;
+
+        // Counters
+        int nodeIdCounter = 0;
+
+        // Exception Handling
 
         if (NODES_X < 1 || NODES_Y < 1)
             throw new IllegalArgumentException("Sizes of X and Y must be 1 or higher");
@@ -43,14 +47,16 @@ public class RumourRoutingApp
             throw new IllegalArgumentException("Times must be positive");
 
 
-        Environment myEnv = new Environment();
+        Environment myEnv = new Environment(NEW_EVENTS);
 
         // Create and Position Nodes
         for ( int xGrid = 0; xGrid < NODES_X; xGrid++)
         {
             for ( int yGrid = 0; yGrid < NODES_Y; yGrid++ )
             {
-                myEnv.addNode(new Node(new Position(xGrid * 10, yGrid * 10), PROB_AGENT));
+                myEnv.addNode(new Node(nodeIdCounter, new Position(xGrid * 10, yGrid * 10), PROB_AGENT));
+                // todo should implement in environment a check that no nodes with the same id can be put into the array list
+                nodeIdCounter++;
             }
         }
 

@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.HashMap;
 import java.util.Queue;
 
 
@@ -20,17 +20,21 @@ public class Node
     private int nodeId;
     private ArrayList<Node> neighbourIds;
     private boolean busyState;
-    private Map<Integer, Integer> eventMap;
+    private HashMap<Event, Integer> eventMap;
     private Queue<Message> messageQueue;
 
-    public Node(Position position, double probAgent, int periodQuery)
+    public Node(int nodeId, Position position, double probAgent, int periodQuery)
     {
+
         this.neighbourIds = new ArrayList<Node>();
+        this.eventMap = new HashMap<Event, Integer>();
         this.position = position;
         this.probAgent = probAgent;
         this.periodQuery = periodQuery;
 
     }
+
+
 
 
     /**
@@ -39,12 +43,15 @@ public class Node
      * @param probAgent probability value between 0 and 1. Probability that an agent is created after occurence
      *                  of an event
      */
-    public Node(Position position, double probAgent)
+    public Node(int nodeId, Position position, double probAgent)
     {
+        this.nodeId = nodeId;
         this.neighbourIds = new ArrayList<Node>();
+        this.eventMap = new HashMap<Event, Integer>();
         this.position = position;
         this.probAgent = probAgent;
     }
+
 
     public void setPeriodQuery(int period)
     {
@@ -59,6 +66,16 @@ public class Node
     public void detectEvent(Event event)
     {
 
+        // todo check if the deep cloning really works.
+        try
+        {
+             this.eventMap.put((Event)event.clone(), this.nodeId);
+        } catch ( java.lang.CloneNotSupportedException e)
+        {
+            // todo have to implement some serious exception handling here
+            System.out.println("shit happend");
+        }
+        
     }
 
     public void makeMove()

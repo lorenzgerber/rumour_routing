@@ -4,14 +4,27 @@
  * distance to where it occured.
  */
 public class Event
+    implements java.lang.Cloneable
 {
     private int id;
     private int zeroTime;
     private int distance;
 
-    public Event(int zeroTime)
+    public Event(int id, int zeroTime)
     {
+        this.id = id;
+        this.zeroTime = zeroTime;
 
+    }
+
+    public Object clone() throws java.lang.CloneNotSupportedException
+    {
+        return super.clone();
+    }
+
+
+    public int getEventId(){
+        return this.id;
     }
 
     public void increaseDistance()
