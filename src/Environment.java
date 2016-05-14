@@ -51,7 +51,10 @@ public class Environment
 
     public void advanceTime()
     {
-
+        for(Node currentNode : nodeList){
+            currentNode.makeMove();
+        }
+        this.time++;
     }
 
     public void addNode(Node node)
