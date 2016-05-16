@@ -47,6 +47,7 @@ public abstract class Message
         maxSteps = null;
         TTL = null;
         recentNodes.clear();
+        recentNodes.trimToSize();
 
     }
 
