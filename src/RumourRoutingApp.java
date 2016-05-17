@@ -57,6 +57,7 @@ public class RumourRoutingApp
             {
                 myEnv.addNode(new Node(nodeIdCounter,
                         new Position(xGrid * 10, yGrid * 10),
+                        myEnv.getTime(),
                         PROB_AGENT,
                         TTL_AGENT,
                         NUMBER_OF_RECENT_NODES));

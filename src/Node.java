@@ -15,6 +15,7 @@ public class Node
 {
 
     public Position position;
+    public int currentTime;
     private double probAgent;
     public int ttlAgent;
     public int periodQuery;
@@ -28,6 +29,7 @@ public class Node
 
     public Node(int nodeId,
                 Position position,
+                int currentTime,
                 double probAgent,
                 int ttlAgent,
                 int ttlQuery,
@@ -56,7 +58,12 @@ public class Node
      * @param probAgent probability value between 0 and 1. Probability that an agent is created after occurence
      *                  of an event
      */
-    public Node(int nodeId, Position position, double probAgent, int ttlAgent, int numRecentNodes)
+    public Node(int nodeId,
+                Position position,
+                int currentTime,
+                double probAgent,
+                int ttlAgent,
+                int numRecentNodes)
     {
         this.nodeId = nodeId;
         this.neighbourIds = new ArrayList<Node>();
@@ -113,6 +120,17 @@ public class Node
 
     public void makeMove()
     {
+        // new query?
+        //if()
+
+        // do we have a message in the queue?
+        if(this.messageQueue.isEmpty())
+            return;
+
+        // do message action
+
+        // check busy state
+            // send message
 
     }
 

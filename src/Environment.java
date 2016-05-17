@@ -35,6 +35,10 @@ public class Environment
         this.nodeList.get(noNodes).setTTLQuery(ttlQuery);
     }
 
+    public int getTime(){
+        return this.time;
+    }
+
 
     public void neighbourInit(double maxDistance)
     {
