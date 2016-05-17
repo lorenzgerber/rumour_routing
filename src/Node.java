@@ -124,15 +124,17 @@ public class Node
 
     public void makeMove()
     {
-
         // do we have a message in the queue?
         if(this.messageQueue.isEmpty())
             return;
 
         // do message action
+        this.messageQueue.element().messageAction();
 
         // check busy state
-            // send message
+        if(!this.busyState){
+            this.sendMessage();
+        }
 
     }
 
