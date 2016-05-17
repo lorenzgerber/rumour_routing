@@ -32,6 +32,10 @@ public class Event
 
     }
 
+    public int hashCode(){
+        return this.id;
+    }
+
 
 
 }
