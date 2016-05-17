@@ -11,9 +11,9 @@ public class Agent extends Message
 {
     private HashMap<Event, Integer> routingMap;
 
-    public Agent(int TTL, Event event, int nodeId){
+    public Agent(int TTL, Event event, int nodeId, int numRecentNodes){
 
-        super(TTL);
+        super(TTL, numRecentNodes);
         this.routingMap = new HashMap<Event, Integer>();
 
         // clone the event and put into routing map

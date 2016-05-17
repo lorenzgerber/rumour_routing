@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
 
 /**
  * Messages are sent between nodes. Message is an
@@ -10,11 +11,14 @@ public abstract class Message
 {
 
     private int TTL;
-    private ArrayList<Integer> recentNodes;
+    private Queue<Integer> recentNodes;
+    private int numRecentNodes;
 
-    public Message(int TTL)
+    public Message(int TTL, int numRecentNodes)
     {
         this.TTL = TTL;
+        this.recentNodes = new LinkedList<Integer>();
+        this.numRecentNodes = numRecentNodes;
 
     }
 
@@ -31,6 +35,9 @@ public abstract class Message
     public void addRecentNodeId(int nodeId)
     {
         recentNodes.add(nodeId);
+        while ( this.recentNodes.size() > this.numRecentNodes){
+            this.recentNodes.remove();
+        }
     }
 
     public void messageAction()
@@ -42,7 +49,6 @@ public abstract class Message
     public void destructor()
     {
         recentNodes.clear();
-        recentNodes.trimToSize();
     }
 
 
