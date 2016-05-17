@@ -10,14 +10,25 @@ import java.util.Stack;
  * of orgin, reporting success in finding the
  * event.
  */
-public class Query
+public class Query extends Message
 {
     private int queryEvent;
     private Stack<Integer> route;
-    private enum status {SEARCH, TRACK, HOMING};
+    private enum queryMode {SEARCH, TRACK, HOMING};
+    private queryMode activeMode;
     private Node destNode;
 
-    public Query(int eventId){
+    public Query(int ttlQuery, int eventId, int nodeId, int numRecentNodes){
+
+        super(ttlQuery, numRecentNodes);
+        this.route = new Stack<Integer>();
+
+        this.queryEvent = eventId;
+        this.route.push(nodeId);
+
+        addRecentNodeId(nodeId);
+
+        this.activeMode = queryMode.SEARCH;
 
     }
 

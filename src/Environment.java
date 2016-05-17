@@ -20,6 +20,7 @@ public class Environment
         this.nodeList = new ArrayList<Node>();
         this.eventList = new ArrayList<Event>();
         this.newEventProb = newEventProb;
+        this.time = 0;
 
     }
 
@@ -65,6 +66,7 @@ public class Environment
     {
         for(Node currentNode : nodeList){
             randomEvent(currentNode);
+            periodQuery(currentNode);
             currentNode.makeMove();
         }
         this.time++;
@@ -94,6 +96,21 @@ public class Environment
             this.eventCounter++;
         }
 
+    }
+
+    public void periodQuery(Node node){
+
+        if(node.getPeriodQuery() == 0)
+            return;
+
+        if (this.time % node.getPeriodQuery() == 0 && this.time != 0){
+
+            Random randomGenerator = new Random();
+            int index = randomGenerator.nextInt(this.eventList.size());
+
+            Event item = this.eventList.get(index);
+            node.newQuery(item.getEventId());
+        }
     }
 
 }

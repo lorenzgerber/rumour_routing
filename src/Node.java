@@ -89,6 +89,10 @@ public class Node
         return (this.nodeId);
     }
 
+    public int getPeriodQuery(){
+        return this.periodQuery;
+    }
+
     public void detectNeighbour(Node node)
     {
         this.neighbourIds.add(node);
@@ -120,8 +124,6 @@ public class Node
 
     public void makeMove()
     {
-        // new query?
-        //if()
 
         // do we have a message in the queue?
         if(this.messageQueue.isEmpty())
@@ -132,6 +134,11 @@ public class Node
         // check busy state
             // send message
 
+    }
+
+    public void newQuery(int eventId){
+        // pick a random event
+        this.messageQueue.add(new Query(this.ttlQuery, eventId, this.nodeId, this.numRecentNodes));
     }
 
     public void sendMessage()

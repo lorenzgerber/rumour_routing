@@ -25,6 +25,8 @@ public class Agent extends Message
             System.out.println("event clone error");
         }
 
+        addRecentNodeId(nodeId);
+
     }
 
     public void agentAction()
