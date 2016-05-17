@@ -20,12 +20,19 @@ public class Node
     public int periodQuery;
     public int ttlQuery;
     private int nodeId;
+    private int numRecentNodes;
     private ArrayList<Node> neighbourIds;
     private boolean busyState;
     private HashMap<Event, Integer> eventMap;
     private Queue<Message> messageQueue;
 
-    public Node(int nodeId, Position position, double probAgent, int ttlAgent, int ttlQuery, int periodQuery)
+    public Node(int nodeId,
+                Position position,
+                double probAgent,
+                int ttlAgent,
+                int ttlQuery,
+                int periodQuery,
+                int numRecentNodes)
     {
 
         this.neighbourIds = new ArrayList<Node>();
@@ -36,6 +43,7 @@ public class Node
         this.ttlAgent = ttlAgent;
         this.periodQuery = periodQuery;
         this.ttlQuery = ttlQuery;
+        this.numRecentNodes = numRecentNodes;
 
     }
 
@@ -48,7 +56,7 @@ public class Node
      * @param probAgent probability value between 0 and 1. Probability that an agent is created after occurence
      *                  of an event
      */
-    public Node(int nodeId, Position position, double probAgent, int ttlAgent)
+    public Node(int nodeId, Position position, double probAgent, int ttlAgent, int numRecentNodes)
     {
         this.nodeId = nodeId;
         this.neighbourIds = new ArrayList<Node>();
@@ -57,6 +65,7 @@ public class Node
         this.position = position;
         this.probAgent = probAgent;
         this.ttlAgent = ttlAgent;
+        this.numRecentNodes = numRecentNodes;
     }
 
 
@@ -95,7 +104,7 @@ public class Node
         double randAgent = Math.random();
         if ( randAgent < this.probAgent){
             // add agent to message queue
-            this.messageQueue.add(new Agent(this.ttlAgent, event, this.nodeId));
+            this.messageQueue.add(new Agent(this.ttlAgent, event, this.nodeId, this.numRecentNodes));
         }
 
 
