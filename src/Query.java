@@ -37,6 +37,10 @@ public class Query extends Message
 
     }
 
+    public boolean isSearchMode(){
+        return activeMode == queryMode.SEARCH;
+    }
+
     public boolean checkEvent(Node node)
     {
         return false;

@@ -40,6 +40,10 @@ public abstract class Message
         }
     }
 
+    public Queue<Integer> getRecentNodes(){
+        return this.recentNodes;
+    }
+
     public void messageAction()
     {
 

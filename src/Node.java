@@ -93,6 +93,10 @@ public class Node
         return this.periodQuery;
     }
 
+    public boolean getBusyState(){
+        return busyState;
+    }
+
     public void detectNeighbour(Node node)
     {
         this.neighbourIds.add(node);
@@ -133,24 +137,51 @@ public class Node
 
         // check busy state
         if(!this.busyState){
-            this.sendMessage();
+            if(this.messageQueue.element() instanceof Query){
+                this.sendQuery();
+            } else {
+                this.sendMessage();
+            }
+
         }
 
     }
 
     public void newQuery(int eventId){
-        // pick a random event
         this.messageQueue.add(new Query(this.ttlQuery, eventId, this.nodeId, this.numRecentNodes));
     }
 
     public void sendMessage()
     {
 
+        for(Node checkNode : this.neighbourIds){
+            if(!this.messageQueue.element().getRecentNodes().contains(checkNode.getNodeId())){
+                if(!checkNode.getBusyState()){
+                    checkNode.receiveMessage(this.messageQueue.remove());
+                    return;
+                }
+
+            }
+        }
+
     }
+
+    public void sendQuery(){
+        if(((Query) this.messageQueue.element()).isSearchMode())
+        {
+            this.sendMessage();
+        }
+
+    }
+
+    public void sendAgent(){
+
+    }
+
 
     public void receiveMessage(Message message)
     {
-
+        this.messageQueue.add(message);
     }
 
     public void messageAction(Message message)
