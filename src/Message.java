@@ -8,15 +8,13 @@ import java.util.ArrayList;
  */
 public abstract class Message
 {
-    private Integer steps;
-    private Integer maxSteps;
-    private Integer TTL = 50;
+
+    private int TTL;
     private ArrayList<Integer> recentNodes;
 
-    public Message(Integer maxSteps, Integer steps)
+    public Message(int TTL)
     {
-        this.steps = steps;
-        this.maxSteps = maxSteps;
+        this.TTL = TTL;
 
     }
 
@@ -43,12 +41,8 @@ public abstract class Message
     //Sets alla references to null adn empty the list so garbage collector can take care.
     public void destructor()
     {
-        steps = null;
-        maxSteps = null;
-        TTL = null;
         recentNodes.clear();
         recentNodes.trimToSize();
-
     }
 
 

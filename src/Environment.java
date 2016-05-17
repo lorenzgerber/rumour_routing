@@ -27,8 +27,12 @@ public class Environment
         return this.nodeList.size();
     }
 
-    public void setQueryPeriod(int noNodes, int periodicity){
+    public void setPeriodQuery(int noNodes, int periodicity){
         this.nodeList.get(noNodes).setPeriodQuery(periodicity);
+    }
+
+    public void setTTLQuery(int noNodes, int ttlQuery){
+        this.nodeList.get(noNodes).setTTLQuery(ttlQuery);
     }
 
 

@@ -1,4 +1,4 @@
-import java.util.Map;
+import java.util.HashMap;
 
 /**
  * An Agent is a specialisation of a message. An Agent
@@ -7,9 +7,25 @@ import java.util.Map;
  * An Agent maintains a routing map with 'his' event and all
  * further events he learns about.
  */
-public class Agent
+public class Agent extends Message
 {
-    private Map<Event, Node> routingMap;
+    private HashMap<Event, Integer> routingMap;
+
+    public Agent(int TTL, Event event, int nodeId){
+
+        super(TTL);
+        this.routingMap = new HashMap<Event, Integer>();
+
+        // clone the event and put into routing map
+        try
+        {
+            this.routingMap.put((Event)event.clone(), nodeId);
+        } catch ( java.lang.CloneNotSupportedException e)
+        {
+            System.out.println("event clone error");
+        }
+
+    }
 
     public void agentAction()
     {

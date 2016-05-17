@@ -54,7 +54,7 @@ public class RumourRoutingApp
         {
             for ( int yGrid = 0; yGrid < NODES_Y; yGrid++ )
             {
-                myEnv.addNode(new Node(nodeIdCounter, new Position(xGrid * 10, yGrid * 10), PROB_AGENT));
+                myEnv.addNode(new Node(nodeIdCounter, new Position(xGrid * 10, yGrid * 10), PROB_AGENT, TTL_AGENT));
                 // todo should implement in environment a check that no nodes with the same id can be put into the array list
                 nodeIdCounter++;
             }
@@ -71,7 +71,8 @@ public class RumourRoutingApp
 
         for (int noQueryNode = 1; noQueryNode < QUERY_NODES; noQueryNode++ )
         {
-            myEnv.setQueryPeriod(noQueryNode, QUERY_PERIODICITY);
+            myEnv.setPeriodQuery(noQueryNode, QUERY_PERIODICITY);
+            myEnv.setTTLQuery(noQueryNode, TTL_QUERY);
         }
 
         // Create Neighbour List
