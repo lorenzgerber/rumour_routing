@@ -32,7 +32,7 @@ public class Query extends Message
 
     }
 
-    public void queryAction()
+    public void messageAction()
     {
 
     }

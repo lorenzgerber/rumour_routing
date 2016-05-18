@@ -29,9 +29,44 @@ public class Agent extends Message
 
     }
 
-    public void agentAction()
-    {
 
+    public void messageAction(HashMap<Event, Integer> nodeEvents)
+    {
+        for( Event agentEventKey : this.routingMap.keySet()){
+            if(nodeEvents.containsKey(agentEventKey)){
+                //System.out.println("Node has key already");
+                // todo compare distance
+            } else {
+                nodeEvents.put(agentEventKey, this.routingMap.get(agentEventKey));
+            }
+        }
+
+        for( Event nodeEventKey : nodeEvents.keySet()){
+            if(this.routingMap.containsKey(nodeEventKey)){
+                //System.out.println("Agent has key already");
+                // todo compare distance
+            } else {
+                this.routingMap.put(nodeEventKey, nodeEvents.get(nodeEventKey));
+            }
+        }
+
+    }
+
+    public void onSendAction(){
+
+    }
+
+    // todo not tested yet. Should return the nodeId of a node not recently visited.
+    public int nextNode(Node currentNode){
+
+        for(Node checkNode : currentNode.getNeighbourIds()){
+            if(!currentNode.getMessageQueue().element().getRecentNodes().contains(checkNode.getNodeId())){
+                // todo implement check if next node is busy or not
+                return checkNode.getNodeId();
+            }
+        }
+
+        return -1;
     }
 
     public void updateRoutingMap(Node node)

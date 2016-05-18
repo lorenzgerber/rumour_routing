@@ -49,11 +49,18 @@ public abstract class Message
         return this.recentNodes;
     }
 
-    public void messageAction()
-    {
+    public void messageAction(){
 
     }
 
+    // todo this method is supposed to be overridden in Query and Agent
+    public int nextNode(Node currentNode){
 
+        return -1;
+    }
+
+    public void onSendAction(){
+
+    }
 
 }

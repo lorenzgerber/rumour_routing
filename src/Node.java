@@ -99,6 +99,12 @@ public class Node
 
     public void resetBusyState() { this.busyState = false; }
 
+    public ArrayList<Node> getNeighbourIds(){ return this.neighbourIds; }
+
+    public Queue<Message> getMessageQueue(){ return this.messageQueue; }
+
+    public HashMap getEventMap(){ return this.eventMap; }
+
 
     public void detectNeighbour(Node node)
     {
@@ -136,7 +142,10 @@ public class Node
             return;
 
         // do message action
-        this.messageQueue.element().messageAction();
+        if(this.messageQueue.element() instanceof Agent){
+            ((Agent) this.messageQueue.element()).messageAction(this.eventMap);
+        }
+
 
         // check TTL of Message if zero, remove
         if(!this.messageQueue.element().checkTTL())
@@ -164,16 +173,10 @@ public class Node
     public void sendMessage()
     {
 
-        for(Node checkNode : this.neighbourIds){
-            if(!this.messageQueue.element().getRecentNodes().contains(checkNode.getNodeId())){
-                if(!checkNode.getBusyState()){
-                    checkNode.receiveMessage(this.messageQueue.remove());
-                    this.busyState = true;
-                    return;
-                }
+        // todo need to implement a generic method to check next node for current message
+        int nextNodeId = this.messageQueue.element().nextNode(this);
 
-            }
-        }
+
 
     }
 
