@@ -27,13 +27,21 @@ public class Event
         return this.id;
     }
 
+    public int getDistance() {return this.distance;}
+
     public void increaseDistance()
     {
-
+        this.distance++;
     }
 
     public int hashCode(){
         return this.id;
+    }
+
+    public boolean equals(Object otherObject){
+        if(this.hashCode() == otherObject.hashCode())
+            return true;
+        return false;
     }
 
 

@@ -1,4 +1,4 @@
-import java.util.Queue;
+import java.util.Deque;
 import java.util.LinkedList;
 
 /**
@@ -11,7 +11,7 @@ public abstract class Message
 {
 
     private int TTL;
-    private Queue<Integer> recentNodes;
+    protected Deque<Integer> recentNodes;
     private int numRecentNodes;
 
     public Message(int TTL, int numRecentNodes)
@@ -45,7 +45,7 @@ public abstract class Message
         }
     }
 
-    public Queue<Integer> getRecentNodes(){
+    public Deque<Integer> getRecentNodes(){
         return this.recentNodes;
     }
 
@@ -54,9 +54,9 @@ public abstract class Message
     }
 
     // todo this method is supposed to be overridden in Query and Agent
-    public int nextNode(Node currentNode){
+    public Node nextNode(Node currentNode){
 
-        return -1;
+        return currentNode;
     }
 
     public void onSendAction(){

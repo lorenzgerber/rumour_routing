@@ -154,15 +154,13 @@ public class Node
             return;
         }
 
-        // check busy state
-        if(!this.busyState){
-            if(this.messageQueue.element() instanceof Query){
-                this.sendQuery();
-            } else {
-                this.sendMessage();
-            }
-
+        // get destination node
+        Node nextNode = this.messageQueue.element().nextNode(this);
+        if (!nextNode.equals(this)){
+            this.sendMessage(nextNode);
         }
+
+
 
     }
 
@@ -170,29 +168,20 @@ public class Node
         this.messageQueue.add(new Query(this.ttlQuery, eventId, this.nodeId, this.numRecentNodes));
     }
 
-    public void sendMessage()
+    public void sendMessage(Node destination)
     {
-
-        // todo need to implement a generic method to check next node for current message
-        int nextNodeId = this.messageQueue.element().nextNode(this);
-
-
+        this.messageQueue.element().onSendAction();
+        destination.receiveMessage(this.messageQueue.remove());
 
     }
 
-    public void sendQuery(){
-        if(((Query) this.messageQueue.element()).isSearchMode())
-        {
-            this.sendMessage();
-        }
-
-    }
 
 
     public void receiveMessage(Message message) throws IllegalStateException
     {
         this.messageQueue.add(message);
         message.reduceTTL();
+        message.addRecentNodeId(this.nodeId);
         this.busyState = true;
     }
 

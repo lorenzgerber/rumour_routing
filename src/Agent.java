@@ -1,5 +1,6 @@
 import java.util.HashMap;
 
+
 /**
  * An Agent is a specialisation of a message. An Agent
  * spreads information among Nodes. An is instantiated with
@@ -32,21 +33,62 @@ public class Agent extends Message
 
     public void messageAction(HashMap<Event, Integer> nodeEvents)
     {
+        // cycling through the Routing map of the Agent
         for( Event agentEventKey : this.routingMap.keySet()){
             if(nodeEvents.containsKey(agentEventKey)){
-                //System.out.println("Node has key already");
-                // todo compare distance
+                for(Event NodeEventKey : nodeEvents.keySet()){
+                    if(NodeEventKey.equals(agentEventKey)){
+                        System.out.println(NodeEventKey.getDistance());
+                        System.out.println(agentEventKey.getDistance());
+                        System.out.println();
+                        if(NodeEventKey.getDistance()>agentEventKey.getDistance()){
+                            // Replace the key value pair in nodeEvents
+                            nodeEvents.remove(NodeEventKey);
+                            try
+                            {
+                                nodeEvents.put((Event)agentEventKey.clone(), this.routingMap.get(agentEventKey));
+                            } catch(CloneNotSupportedException e){
+                                System.out.println("cloning problem");
+                            }
+
+                        }
+                    }
+                }
             } else {
-                nodeEvents.put(agentEventKey, this.routingMap.get(agentEventKey));
+                try {
+                    nodeEvents.put((Event)agentEventKey.clone(), this.routingMap.get(agentEventKey));
+                } catch (CloneNotSupportedException e) {
+                    System.out.println("cloning problem");
+                }
             }
+
         }
 
+        // cycling through the nodeEvents
         for( Event nodeEventKey : nodeEvents.keySet()){
             if(this.routingMap.containsKey(nodeEventKey)){
-                //System.out.println("Agent has key already");
-                // todo compare distance
+                for(Event agentEventKey : this.routingMap.keySet()){
+                    if(agentEventKey.equals(nodeEventKey)){
+                        if(agentEventKey.getDistance() > nodeEventKey.getDistance()){
+                            //Replace the key value pair in routingMap
+                            this.routingMap.remove(agentEventKey);
+                            try
+                            {
+                                this.routingMap.put((Event)nodeEventKey.clone(), nodeEvents.get(nodeEventKey));
+                            } catch(CloneNotSupportedException e){
+                                System.out.println("cloning problem");
+                            }
+
+                        }
+                    }
+                }
+
             } else {
-                this.routingMap.put(nodeEventKey, nodeEvents.get(nodeEventKey));
+                try{
+                    this.routingMap.put((Event) nodeEventKey.clone(), nodeEvents.get(nodeEventKey));
+                } catch (CloneNotSupportedException e){
+                    System.out.println("cloning problem");
+                }
             }
         }
 
@@ -54,34 +96,46 @@ public class Agent extends Message
 
     public void onSendAction(){
 
+        this.updateRoutingMapEventDist();
+        this.updateRoutingMapNodeId();
+
     }
 
-    // todo not tested yet. Should return the nodeId of a node not recently visited.
-    public int nextNode(Node currentNode){
+
+
+    public Node nextNode(Node currentNode){
 
         for(Node checkNode : currentNode.getNeighbourIds()){
             if(!currentNode.getMessageQueue().element().getRecentNodes().contains(checkNode.getNodeId())){
-                // todo implement check if next node is busy or not
-                return checkNode.getNodeId();
+                if(!checkNode.getBusyState()){
+                    return checkNode;
+                }
+
             }
         }
 
-        return -1;
+        return currentNode;
     }
 
-    public void updateRoutingMap(Node node)
+
+    public void updateRoutingMapEventDist()
     {
+        for(Event updateEventDist : this.routingMap.keySet()){
+            updateEventDist.increaseDistance();
+
+        }
 
     }
 
-    public void updateRecentNodes(Node node)
+    public void updateRoutingMapNodeId()
     {
+        for(Integer updateNodeId : this.routingMap.values()){
+            updateNodeId = this.recentNodes.getLast();
+        }
+
 
     }
 
-    public void incrementEventDistance(Event event)
-    {
 
-    }
 
 }
