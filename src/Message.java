@@ -32,6 +32,11 @@ public abstract class Message
         return true;
     }
 
+
+    public void reduceTTL(){
+        this.TTL--;
+    }
+
     public void addRecentNodeId(int nodeId)
     {
         recentNodes.add(nodeId);

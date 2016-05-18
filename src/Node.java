@@ -142,6 +142,7 @@ public class Node
         if(!this.messageQueue.element().checkTTL())
         {
             this.messageQueue.remove();
+            return;
         }
 
         // check busy state
@@ -188,6 +189,7 @@ public class Node
     public void receiveMessage(Message message) throws IllegalStateException
     {
         this.messageQueue.add(message);
+        message.reduceTTL();
         this.busyState = true;
     }
 
