@@ -69,6 +69,12 @@ public class Environment
             periodQuery(currentNode);
             currentNode.makeMove();
         }
+
+        // after one time round, reset all busy states
+        for(Node currentNode: nodeList){
+            currentNode.resetBusyState();
+        }
+
         this.time++;
     }
 

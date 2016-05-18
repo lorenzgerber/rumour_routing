@@ -97,6 +97,9 @@ public class Node
         return busyState;
     }
 
+    public void resetBusyState() { this.busyState = false; }
+
+
     public void detectNeighbour(Node node)
     {
         this.neighbourIds.add(node);
@@ -158,6 +161,7 @@ public class Node
             if(!this.messageQueue.element().getRecentNodes().contains(checkNode.getNodeId())){
                 if(!checkNode.getBusyState()){
                     checkNode.receiveMessage(this.messageQueue.remove());
+                    this.busyState = true;
                     return;
                 }
 
@@ -174,14 +178,11 @@ public class Node
 
     }
 
-    public void sendAgent(){
 
-    }
-
-
-    public void receiveMessage(Message message)
+    public void receiveMessage(Message message) throws IllegalStateException
     {
         this.messageQueue.add(message);
+        this.busyState = true;
     }
 
     public void messageAction(Message message)
