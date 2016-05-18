@@ -22,14 +22,14 @@ public abstract class Message
 
     }
 
-    //For each call decrease Time to live with 1, if zero destroy message.
-    public void checkTTL()
+    // returns false when TTL is zero
+    public boolean checkTTL()
     {
-        TTL = TTL -1;
-        if(TTL == 0)
-        {
-            destructor();
+        if(this.TTL == 0){
+            return false;
         }
+
+        return true;
     }
 
     public void addRecentNodeId(int nodeId)
@@ -49,11 +49,6 @@ public abstract class Message
 
     }
 
-    //Sets alla references to null adn empty the list so garbage collector can take care.
-    public void destructor()
-    {
-        recentNodes.clear();
-    }
 
 
 }

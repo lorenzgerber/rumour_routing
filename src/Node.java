@@ -138,6 +138,12 @@ public class Node
         // do message action
         this.messageQueue.element().messageAction();
 
+        // check TTL of Message if zero, remove
+        if(!this.messageQueue.element().checkTTL())
+        {
+            this.messageQueue.remove();
+        }
+
         // check busy state
         if(!this.busyState){
             if(this.messageQueue.element() instanceof Query){
