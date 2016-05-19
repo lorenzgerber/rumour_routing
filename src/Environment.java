@@ -112,10 +112,14 @@ public class Environment
         if (this.time % node.getPeriodQuery() == 0 && this.time != 0){
 
             Random randomGenerator = new Random();
-            int index = randomGenerator.nextInt(this.eventList.size());
+            if(this.eventList.size() != 0){
+                int index = randomGenerator.nextInt(this.eventList.size());
+                Event item = this.eventList.get(index);
+                node.newQuery(item.getEventId());
+            }
 
-            Event item = this.eventList.get(index);
-            node.newQuery(item.getEventId());
+
+
         }
     }
 

@@ -11,8 +11,8 @@ public class RumourRoutingApp
     {
 
         // Setting Parameters
-        int NODES_X                 = 10;
-        int NODES_Y                 = 10;
+        int NODES_X                 = 50;
+        int NODES_Y                 = 50;
         int NO_NODES                = NODES_X * NODES_Y;
         double NEW_EVENTS           = 0.0001;
         int NODE_RANGE              = 15;
@@ -21,7 +21,7 @@ public class RumourRoutingApp
         int TTL_QUERY               = 50;
         int QUERY_NODES             = 4;
         int QUERY_PERIODICITY       = 400;
-        int TIMESTEPS               = 1000;
+        int TIMESTEPS               = 10000;
         int NUMBER_OF_RECENT_NODES  = 5;
 
         // Counters

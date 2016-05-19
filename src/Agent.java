@@ -38,12 +38,12 @@ public class Agent extends Message
             if(nodeEvents.containsKey(agentEventKey)){
                 for(Event NodeEventKey : nodeEvents.keySet()){
                     if(NodeEventKey.equals(agentEventKey)){
-                        System.out.println(NodeEventKey.getDistance());
-                        System.out.println(agentEventKey.getDistance());
-                        System.out.println();
+                        //System.out.println(NodeEventKey.getDistance());
+                        //System.out.println(agentEventKey.getDistance());
+                        //System.out.println();
                         if(NodeEventKey.getDistance()>agentEventKey.getDistance()){
                             // Replace the key value pair in nodeEvents
-                            nodeEvents.remove(NodeEventKey);
+                            //nodeEvents.remove(NodeEventKey);
                             try
                             {
                                 nodeEvents.put((Event)agentEventKey.clone(), this.routingMap.get(agentEventKey));
@@ -71,7 +71,7 @@ public class Agent extends Message
                     if(agentEventKey.equals(nodeEventKey)){
                         if(agentEventKey.getDistance() > nodeEventKey.getDistance()){
                             //Replace the key value pair in routingMap
-                            this.routingMap.remove(agentEventKey);
+                            //this.routingMap.remove(agentEventKey);
                             try
                             {
                                 this.routingMap.put((Event)nodeEventKey.clone(), nodeEvents.get(nodeEventKey));
@@ -129,8 +129,11 @@ public class Agent extends Message
 
     public void updateRoutingMapNodeId()
     {
-        for(Integer updateNodeId : this.routingMap.values()){
-            updateNodeId = this.recentNodes.getLast();
+        for(Event updateEventNode : this.routingMap.keySet()){
+
+            int newId = this.recentNodes.getLast();
+            this.routingMap.put(updateEventNode, newId);
+
         }
 
 
