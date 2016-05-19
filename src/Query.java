@@ -33,9 +33,19 @@ public class Query extends Message
 
     }
 
-    public void messageAction()
-    {
+    public void messageAction() {
+        switch (activeMode) {
+            case SEARCH:{
 
+            }
+            case TRACK:{
+
+            }
+            case HOMING:{
+
+            }
+
+        }
     }
 
     public void onSendAction()
