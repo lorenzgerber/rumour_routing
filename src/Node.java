@@ -114,14 +114,12 @@ public class Node
     public void detectEvent(Event event)
     {
 
-        // todo check if the deep cloning really works.
         try
         {
              this.eventMap.put((Event)event.clone(), this.nodeId);
         } catch ( java.lang.CloneNotSupportedException e)
         {
-            // todo have to implement some serious exception handling here
-            System.out.println("shit happend");
+            System.out.println("cloning error");
         }
 
         //random agent generation
@@ -184,11 +182,5 @@ public class Node
         message.addRecentNodeId(this.nodeId);
         this.busyState = true;
     }
-
-    public void messageAction(Message message)
-    {
-
-    }
-
 
 }

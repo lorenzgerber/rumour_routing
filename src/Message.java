@@ -53,7 +53,6 @@ public abstract class Message
 
     }
 
-    // todo this method is supposed to be overridden in Query and Agent
     public Node nextNode(Node currentNode){
 
         return currentNode;
