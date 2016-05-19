@@ -15,8 +15,19 @@ public class Environment
     private double newEventProb;
     private int eventCounter = 0;
 
-    public Environment(double newEventProb)
+    /**
+     * Constructor for Environment
+     *
+     * @param newEventProb Probability of creating a new
+     *                     event per time step and node.
+     *                     Probability from 0 to 1.
+     * @throws IllegalArgumentException
+     */
+    public Environment(double newEventProb) throws IllegalArgumentException
     {
+        if (newEventProb > 1)
+            throw new IllegalArgumentException();
+
         this.nodeList = new ArrayList<Node>();
         this.eventList = new ArrayList<Event>();
         this.newEventProb = newEventProb;
@@ -24,27 +35,61 @@ public class Environment
 
     }
 
-    public int getLengthNodes(){
+    /**
+     * Returns number of Nodes in Environment
+     *
+     * @return int number of nodes
+     */
+    public int numberOfNodes(){
         return this.nodeList.size();
     }
 
+    /**
+     * set Query Periodicity of Node
+     *
+     * By default Nodes have query Periodicity  with number noNode is set to be a Query node.
+     * Every n:th time step a query event is started
+     * where n is the periodicity argument.
+     *
+     * @param noNodes int number of Query node in Environment
+     * @param periodicity period for creating query nodes
+     */
     public void setPeriodQuery(int noNodes, int periodicity){
         this.nodeList.get(noNodes).setPeriodQuery(periodicity);
     }
 
+    /**
+     * Set Query Time To Live (TTL) for Node with number
+     * 'noNode' in the environment.
+     *
+     * @param noNodes
+     * @param ttlQuery
+     */
     public void setTTLQuery(int noNodes, int ttlQuery){
         this.nodeList.get(noNodes).setTTLQuery(ttlQuery);
     }
 
+
+    /**
+     * getter for current Time
+     * @return int current time.
+     */
     public int getTime(){
         return this.time;
     }
 
 
+    /**
+     * Method to populate the neighbour lists of
+     * all nodes in the environment. The method
+     * calls the detectNeighbour method of a node
+     * to register a neighbour.
+     * @param maxDistance int send/receive distance of nodes
+     */
     public void neighbourInit(double maxDistance)
     {
-        for ( int fromNode = 0; fromNode < this.getLengthNodes(); fromNode++ ){
-            for(int toNode = 0; toNode < this.getLengthNodes(); toNode++ ){
+        for ( int fromNode = 0; fromNode < this.numberOfNodes(); fromNode++ ){
+            for( int toNode = 0; toNode < this.numberOfNodes(); toNode++ ){
 
                 if(fromNode != toNode){
                     int x1 = this.nodeList.get(fromNode).position.getX();
@@ -62,6 +107,11 @@ public class Environment
 
     }
 
+    /**
+     * Advance Time calls every node in the
+     * environment to make it's move and then advances
+     * the experimental time by 1.
+     */
     public void advanceTime()
     {
         for(Node currentNode : nodeList){
@@ -78,6 +128,10 @@ public class Environment
         this.time++;
     }
 
+    /**
+     * add a Node object to the Environment
+     * @param node
+     */
     public void addNode(Node node)
     {
         this.nodeList.add(node);
@@ -104,6 +158,15 @@ public class Environment
 
     }
 
+    /**
+     * Compare experimental time with
+     * Query periodicity of each node in the
+     * Environment. If period and current time matches,
+     * a random existing event is chosen to be searched
+     * for and a new query is instantiated and put into
+     * the message queue of the current node.
+     * @param node Node object to check
+     */
     public void periodQuery(Node node){
 
         if(node.getPeriodQuery() == 0)

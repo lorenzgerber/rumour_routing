@@ -17,12 +17,6 @@ public class Event
 
     }
 
-    public Object clone() throws java.lang.CloneNotSupportedException
-    {
-        return super.clone();
-    }
-
-
     public int getEventId(){
         return this.id;
     }
@@ -34,14 +28,22 @@ public class Event
         this.distance++;
     }
 
+    @Override
     public int hashCode(){
         return this.id;
     }
 
+    @Override
     public boolean equals(Object otherObject){
         if(this.hashCode() == otherObject.hashCode())
             return true;
         return false;
+    }
+
+    @Override
+    public Object clone() throws java.lang.CloneNotSupportedException
+    {
+        return super.clone();
     }
 
 

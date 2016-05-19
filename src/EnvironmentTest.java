@@ -5,4 +5,15 @@ import org.junit.Test;
  */
 public class EnvironmentTest
 {
+
+    @Test
+    public void instantiateAnEnvironment() throws Exception {
+        new Environment(0.1);
+    }
+
+
+
+
+
+
 }
