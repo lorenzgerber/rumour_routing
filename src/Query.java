@@ -37,18 +37,32 @@ public class Query extends Message
 
     }
 
+    public void onSendAction()
+    {
+
+    }
+
+    public Node nextNode(Node currentNode)
+    {
+        return currentNode;
+    }
+
     public boolean isSearchMode(){
         return activeMode == queryMode.SEARCH;
+    }
+
+    public boolean isTrackMode(){
+        return activeMode == queryMode.TRACK;
+    }
+
+    public boolean isHomingMode(){
+        return activeMode == queryMode.HOMING;
     }
 
     public boolean checkEvent(Node node)
     {
         return false;
     }
-
-    public void homing()
-    {
-
-    }
+    
 
 }
