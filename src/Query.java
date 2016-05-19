@@ -10,6 +10,7 @@ import java.util.Stack;
  * of orgin, reporting success in finding the
  * event.
  */
+
 public class Query extends Message
 {
     private int queryEvent;
@@ -42,8 +43,17 @@ public class Query extends Message
 
     }
 
-    public Node nextNode(Node currentNode)
-    {
+    public Node nextNode(Node currentNode) {
+        if (activeMode == queryMode.SEARCH) {
+            for (Node checkNode : currentNode.getNeighbourIds()) {
+                if (!currentNode.getMessageQueue().element().getRecentNodes().contains(checkNode.getNodeId())) {
+                    if (!checkNode.getBusyState()) {
+                        return checkNode;
+                    }
+
+                }
+            }
+        }
         return currentNode;
     }
 
