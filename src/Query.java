@@ -46,11 +46,11 @@ public class Query extends Message
 
             }
             case HOMING: {
-                while (!route.empty()) {
+                //while (!route.empty()) {
 
                     //nextNode(route.pop());
 
-                }
+                //}
             }
 
         }
