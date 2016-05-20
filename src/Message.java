@@ -42,7 +42,7 @@ public abstract class Message
     }
 
     /*
-    * Adds already visted nodes to a list callaed recentNodes.
+    * Adds already visted nodes to a list called recentNodes.
     * @param nodeId - int the id number of the node.
     */
     public void addRecentNodeId(int nodeId)
@@ -66,8 +66,8 @@ public abstract class Message
 
     }
     /*
-    *
-     */
+    * @param currentNode- Node the current node.
+    */
     public Node nextNode(Node currentNode){
 
         return currentNode;
