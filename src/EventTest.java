@@ -1,8 +1,11 @@
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
-/**
- * Created by loge on 11/05/16.
- */
 public class EventTest
 {
+    @Test
+    public void testConstructor() {
+        assertNotNull(new Event(7, 7));
+    }
 }
