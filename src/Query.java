@@ -36,7 +36,7 @@ public class Query extends Message
     public void messageAction(Node currentNode) {
         switch (activeMode) {
             case SEARCH:{
-               
+
 
             }
             case TRACK:{
