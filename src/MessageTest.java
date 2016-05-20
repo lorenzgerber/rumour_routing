@@ -8,11 +8,37 @@ import static junit.framework.TestCase.assertEquals;
 public class MessageTest
 {
     @Test
-    public void testTTL()
-    {
-        Message message = new Message(50,3);
+    public void checkTTL() throws Exception {
 
-        if(message.reduceTTL() = 49);
+    }
+
+    @Test
+    public void reduceTTL() throws Exception {
+
+    }
+
+    @Test
+    public void addRecentNodeId() throws Exception {
+
+    }
+
+    @Test
+    public void getRecentNodes() throws Exception {
+
+    }
+
+    @Test
+    public void messageAction() throws Exception {
+
+    }
+
+    @Test
+    public void nextNode() throws Exception {
+
+    }
+
+    @Test
+    public void onSendAction() throws Exception {
 
     }
 

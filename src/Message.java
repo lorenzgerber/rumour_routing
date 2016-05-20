@@ -22,7 +22,9 @@ public abstract class Message
 
     }
 
-    // returns false when TTL is zero
+    /*
+     *Returns false when time limit for message is zero. True otherwise.
+     */
     public boolean checkTTL()
     {
         if(this.TTL == 0){
@@ -32,11 +34,17 @@ public abstract class Message
         return true;
     }
 
-
+    /*
+    * Reduce the timlimit with one each time the method is called.
+    */
     public void reduceTTL(){
         this.TTL--;
     }
 
+    /*
+    * Adds already visted nodes to a list callaed recentNodes.
+    * @param nodeId - int the id number of the node.
+    */
     public void addRecentNodeId(int nodeId)
     {
         recentNodes.add(nodeId);
@@ -44,15 +52,22 @@ public abstract class Message
             this.recentNodes.remove();
         }
     }
-
+    /*
+    * Returns the list with visited nodes.
+    */
     public Deque<Integer> getRecentNodes(){
         return this.recentNodes;
     }
 
+    /*
+    *
+     */
     public void messageAction(){
 
     }
-
+    /*
+    *
+     */
     public Node nextNode(Node currentNode){
 
         return currentNode;
