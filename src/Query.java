@@ -56,17 +56,32 @@ public class Query extends Message
         }
     }
     public Node nextNode(Node currentNode) {
-        if (activeMode == queryMode.SEARCH) {
-            for (Node checkNode : currentNode.getNeighbourIds()) {
-                if (!currentNode.getMessageQueue().element().getRecentNodes().contains(checkNode.getNodeId())) {
-                    if (!checkNode.getBusyState()) {
-                        return checkNode;
-                    }
+        switch (activeMode){
+            case SEARCH: {
+                if (activeMode == queryMode.SEARCH) {
+                    for (Node checkNode : currentNode.getNeighbourIds()) {
+                        if (!currentNode.getMessageQueue().element().getRecentNodes().contains(checkNode.getNodeId())) {
+                            if (!checkNode.getBusyState()) {
+                                return checkNode;
+                            }
 
+                        }
+                    }
                 }
             }
+
+            case TRACK: {
+                System.out.println("next node tracking mode");
+            }
+
+            case HOMING: {
+                System.out.println("next node homing mode");
+
+            }
         }
+
         return currentNode;
+
     }
 
     public boolean isSearchMode(){
