@@ -34,26 +34,27 @@ public class Query extends Message
     }
 
     public void messageAction(Node currentNode) {
+
+    }
+
+    public void onSendAction() {
         switch (activeMode) {
-            case SEARCH:{
-
-
-            }
-            case TRACK:{
+            case SEARCH: {
 
             }
-            case HOMING:{
+            case TRACK: {
 
+            }
+            case HOMING: {
+                while (!route.empty()) {
+
+                    //nextNode(route.pop());
+
+                }
             }
 
         }
     }
-
-    public void onSendAction()
-    {
-
-    }
-
     public Node nextNode(Node currentNode) {
         if (activeMode == queryMode.SEARCH) {
             for (Node checkNode : currentNode.getNeighbourIds()) {
