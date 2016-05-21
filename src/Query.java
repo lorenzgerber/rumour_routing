@@ -37,6 +37,10 @@ public class Query extends Message
         switch (activeMode) {
             case SEARCH:{
                 //todo: If we are in Search mode, check whether the current node has a routing for the eventId we're looking for
+                if(checkEvent(currentNode)){
+                    this.activeMode = queryMode.TRACK;
+                    System.out.println("we found the track");
+                }
 
             }
             case TRACK:{
@@ -85,11 +89,26 @@ public class Query extends Message
             }
 
             case TRACK: {
-                System.out.println("next node tracking mode");
+                for(Object findEvent : currentNode.getEventMap().keySet()){
+                    if(((Event)findEvent).getEventId()==this.queryEvent){
+                        Integer findNodeId = (Integer) currentNode.getEventMap().get((Event)findEvent);
+                        for(Node findNode : currentNode.getNeighbourIds()){
+                            if(findNode.getNodeId() == findNodeId){
+                                System.out.println("we found the next tracking node");
+                                if (!findNode.getBusyState()){
+                                    return findNode;
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+                //System.out.println("next node tracking mode");
             }
 
             case HOMING: {
-                System.out.println("next node homing mode");
+                //System.out.println("next node homing mode");
 
             }
         }
@@ -112,6 +131,12 @@ public class Query extends Message
 
     public boolean checkEvent(Node node)
     {
+
+        for(Object test : node.getEventMap().keySet()){
+            if(((Event)test).getEventId()==this.queryEvent){
+                return true;
+            }
+        }
         return false;
     }
     

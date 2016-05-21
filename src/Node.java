@@ -144,7 +144,7 @@ public class Node
         if(!this.messageQueue.element().checkTTL())
         {
             if ( this.messageQueue.element() instanceof Query ){
-                System.out.println("A Query just died");
+                //System.out.println("A Query just died");
             }
             this.messageQueue.remove();
             return;
