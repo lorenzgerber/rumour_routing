@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.Set;
 
 /**
  * A query is a specialisation of a Message.
@@ -45,6 +46,16 @@ public class Query extends Message
             }
             case TRACK:{
                 //todo: if we are in Track mode, did we reach the node that has our event?
+                for(Object checkEvent : currentNode.getEventMap().keySet()){
+                    if(((Event)checkEvent).getEventId() == this.queryEvent){
+                        if (((Event)checkEvent).getDistance() == 0){
+                            System.out.println("we found the event node");
+                            this.activeMode = queryMode.HOMING;
+                        }
+                    }
+                }
+
+
 
             }
             case HOMING:{
@@ -80,6 +91,8 @@ public class Query extends Message
                     for (Node checkNode : currentNode.getNeighbourIds()) {
                         if (!currentNode.getMessageQueue().element().getRecentNodes().contains(checkNode.getNodeId())) {
                             if (!checkNode.getBusyState()) {
+                                //todo should find a better place to add nodeId's to the route stack
+                                this.route.push(checkNode.getNodeId());
                                 return checkNode;
                             }
 
@@ -94,8 +107,10 @@ public class Query extends Message
                         Integer findNodeId = (Integer) currentNode.getEventMap().get((Event)findEvent);
                         for(Node findNode : currentNode.getNeighbourIds()){
                             if(findNode.getNodeId() == findNodeId){
-                                System.out.println("we found the next tracking node");
+                                //System.out.println("we found the next tracking node");
                                 if (!findNode.getBusyState()){
+                                    //todo should find a better place to add nodeId's to the route stack
+                                    this.route.push(findNode.getNodeId());
                                     return findNode;
                                 }
 
@@ -132,13 +147,12 @@ public class Query extends Message
     public boolean checkEvent(Node node)
     {
 
-        for(Object test : node.getEventMap().keySet()){
-            if(((Event)test).getEventId()==this.queryEvent){
+        for(Object checkEvent : node.getEventMap().keySet()){
+            if(((Event)checkEvent).getEventId()==this.queryEvent){
                 return true;
             }
         }
         return false;
     }
-    
 
 }
