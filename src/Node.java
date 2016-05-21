@@ -180,7 +180,7 @@ public class Node
     }
 
     public void newQuery(int eventId){
-        this.messageQueue.add(new Query(this.ttlQuery, eventId, this.nodeId, this.numRecentNodes));
+        this.messageQueue.add(new Query(this.ttlQuery, eventId, this, this.numRecentNodes));
     }
 
     public void sendMessage(Node destination)

@@ -1,5 +1,4 @@
 import java.util.Stack;
-import java.util.Set;
 
 /**
  * A query is a specialisation of a Message.
@@ -15,20 +14,20 @@ import java.util.Set;
 public class Query extends Message
 {
     private int queryEvent;
-    private Stack<Integer> route;
+    private Stack<Node> route;
     private enum queryMode {SEARCH, TRACK, HOMING};
     private queryMode activeMode;
     private Node destNode;
 
-    public Query(int ttlQuery, int eventId, int nodeId, int numRecentNodes){
+    public Query(int ttlQuery, int eventId, Node currentNode, int numRecentNodes){
 
         super(ttlQuery, numRecentNodes);
-        this.route = new Stack<Integer>();
+        this.route = new Stack<Node>();
 
         this.queryEvent = eventId;
-        this.route.push(nodeId);
+        this.route.push(currentNode);
 
-        addRecentNodeId(nodeId);
+        addRecentNodeId(currentNode.getNodeId());
 
         this.activeMode = queryMode.SEARCH;
 
@@ -92,7 +91,7 @@ public class Query extends Message
                         if (!currentNode.getMessageQueue().element().getRecentNodes().contains(checkNode.getNodeId())) {
                             if (!checkNode.getBusyState()) {
                                 //todo should find a better place to add nodeId's to the route stack
-                                this.route.push(checkNode.getNodeId());
+                                this.route.push(checkNode);
                                 return checkNode;
                             }
 
@@ -110,7 +109,7 @@ public class Query extends Message
                                 //System.out.println("we found the next tracking node");
                                 if (!findNode.getBusyState()){
                                     //todo should find a better place to add nodeId's to the route stack
-                                    this.route.push(findNode.getNodeId());
+                                    this.route.push(findNode);
                                     return findNode;
                                 }
 
@@ -132,17 +131,6 @@ public class Query extends Message
 
     }
 
-    public boolean isSearchMode(){
-        return activeMode == queryMode.SEARCH;
-    }
-
-    public boolean isTrackMode(){
-        return activeMode == queryMode.TRACK;
-    }
-
-    public boolean isHomingMode(){
-        return activeMode == queryMode.HOMING;
-    }
 
     public boolean checkEvent(Node node)
     {
