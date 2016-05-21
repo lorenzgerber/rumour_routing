@@ -13,18 +13,22 @@ import java.util.Stack;
 
 public class Query extends Message
 {
-    private int queryEvent;
+    private int queryEventId;
     private Stack<Node> route;
     private enum queryMode {SEARCH, TRACK, HOMING};
     private queryMode activeMode;
+    private Node originNode;
     private Node destNode;
+    private Event foundEvent;
 
-    public Query(int ttlQuery, int eventId, Node currentNode, int numRecentNodes){
+
+    public Query(int ttlQuery, int queryEventId, Node currentNode, int numRecentNodes){
 
         super(ttlQuery, numRecentNodes);
         this.route = new Stack<Node>();
+        this.originNode = currentNode;
 
-        this.queryEvent = eventId;
+        this.queryEventId = queryEventId;
         this.route.push(currentNode);
 
         addRecentNodeId(currentNode.getNodeId());
@@ -33,22 +37,34 @@ public class Query extends Message
 
     }
 
+    public void resetTTL(){
+        this.TTL = 0;
+    }
+
     public void messageAction(Node currentNode) {
         switch (activeMode) {
             case SEARCH:{
                 //todo: If we are in Search mode, check whether the current node has a routing for the eventId we're looking for
                 if(checkEvent(currentNode)){
                     this.activeMode = queryMode.TRACK;
-                    System.out.println("we found the track");
                 }
 
-            }
+            } break;
+
             case TRACK:{
                 //todo: if we are in Track mode, did we reach the node that has our event?
                 for(Object checkEvent : currentNode.getEventMap().keySet()){
-                    if(((Event)checkEvent).getEventId() == this.queryEvent){
+                    if(((Event)checkEvent).getEventId() == this.queryEventId){
                         if (((Event)checkEvent).getDistance() == 0){
-                            System.out.println("we found the event node");
+                            // put a clone of the found event into the query
+                            try
+                            {
+                                this.foundEvent = (Event) ((Event)checkEvent).clone();
+                            } catch(CloneNotSupportedException e)
+                            {
+                                System.out.println("problem with cloning");
+                            }
+                            this.destNode = currentNode;
                             this.activeMode = queryMode.HOMING;
                         }
                     }
@@ -56,11 +72,21 @@ public class Query extends Message
 
 
 
-            }
+            } break;
+
             case HOMING:{
                 //todo: if we are in Homing mode, did we reach back to our home node / is the stack empty
+                if (currentNode.equals(this.originNode)){
+                    System.out.printf("Event at x: %d y %d, at time %d, id %d \n",
+                            this.destNode.getX(),
+                            this.destNode.getY(),
+                            this.foundEvent.getZeroTime(),
+                            this.queryEventId);
+                    this.resetTTL();
+                }
 
-            }
+
+            } break;
         }
 
     }
@@ -98,15 +124,14 @@ public class Query extends Message
                         }
                     }
                 }
-            }
+            } break;
 
             case TRACK: {
                 for(Object findEvent : currentNode.getEventMap().keySet()){
-                    if(((Event)findEvent).getEventId()==this.queryEvent){
+                    if(((Event)findEvent).getEventId()==this.queryEventId){
                         Integer findNodeId = (Integer) currentNode.getEventMap().get((Event)findEvent);
                         for(Node findNode : currentNode.getNeighbourIds()){
                             if(findNode.getNodeId() == findNodeId){
-                                //System.out.println("we found the next tracking node");
                                 if (!findNode.getBusyState()){
                                     //todo should find a better place to add nodeId's to the route stack
                                     this.route.push(findNode);
@@ -118,13 +143,15 @@ public class Query extends Message
                     }
                 }
 
-                //System.out.println("next node tracking mode");
-            }
+            } break;
 
             case HOMING: {
-                //System.out.println("next node homing mode");
 
-            }
+                if (!this.route.peek().getBusyState()){
+                    return this.route.pop();
+                }
+
+            } break;
         }
 
         return currentNode;
@@ -136,7 +163,7 @@ public class Query extends Message
     {
 
         for(Object checkEvent : node.getEventMap().keySet()){
-            if(((Event)checkEvent).getEventId()==this.queryEvent){
+            if(((Event)checkEvent).getEventId()==this.queryEventId){
                 return true;
             }
         }

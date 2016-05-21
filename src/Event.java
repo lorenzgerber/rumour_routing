@@ -28,6 +28,10 @@ public class Event
         this.distance++;
     }
 
+    public int getZeroTime(){
+        return zeroTime;
+    }
+
     @Override
     public int hashCode(){
         return this.id;

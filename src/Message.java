@@ -10,7 +10,7 @@ import java.util.LinkedList;
 public abstract class Message
 {
 
-    private int TTL;
+    protected int TTL;
     protected Deque<Integer> recentNodes;
     private int numRecentNodes;
 
