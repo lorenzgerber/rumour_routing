@@ -31,9 +31,9 @@ public class Agent extends Message
 
     }
 
-
-    public void messageAction(HashMap<Event, Integer> nodeEvents)
+    public void messageAction(Node currentNode)
     {
+        HashMap<Event, Integer> nodeEvents = currentNode.getEventMap();
         // cycling through the Routing map of the Agent
         for( Event agentEventKey : this.routingMap.keySet()){
             if(nodeEvents.containsKey(agentEventKey)){

@@ -129,8 +129,6 @@ public class Node
             this.messageQueue.add(new Agent(this.ttlAgent, event, this.nodeId, this.numRecentNodes));
         }
 
-
-
     }
 
     public void makeMove()
@@ -140,14 +138,14 @@ public class Node
             return;
 
         // do message action
-        if(this.messageQueue.element() instanceof Agent){
-            ((Agent) this.messageQueue.element()).messageAction(this.eventMap);
-        }
-
+        this.messageQueue.element().messageAction(this);
 
         // check TTL of Message if zero, remove
         if(!this.messageQueue.element().checkTTL())
         {
+            if ( this.messageQueue.element() instanceof Query ){
+                System.out.println("A Query just died");
+            }
             this.messageQueue.remove();
             return;
         }
