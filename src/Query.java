@@ -34,6 +34,20 @@ public class Query extends Message
     }
 
     public void messageAction(Node currentNode) {
+        switch (activeMode) {
+            case SEARCH:{
+                //todo: If we are in Search mode, check whether the current node has a routing for the eventId we're looking for
+
+            }
+            case TRACK:{
+                //todo: if we are in Track mode, did we reach the node that has our event?
+
+            }
+            case HOMING:{
+                //todo: if we are in Homing mode, did we reach back to our home node / is the stack empty
+
+            }
+        }
 
     }
 
