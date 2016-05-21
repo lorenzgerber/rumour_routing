@@ -44,7 +44,6 @@ public class Query extends Message
     public void messageAction(Node currentNode) {
         switch (activeMode) {
             case SEARCH:{
-                //todo: If we are in Search mode, check whether the current node has a routing for the eventId we're looking for
                 if(checkEvent(currentNode)){
                     this.activeMode = queryMode.TRACK;
                 }
@@ -52,7 +51,6 @@ public class Query extends Message
             } break;
 
             case TRACK:{
-                //todo: if we are in Track mode, did we reach the node that has our event?
                 for(Object checkEvent : currentNode.getEventMap().keySet()){
                     if(((Event)checkEvent).getEventId() == this.queryEventId){
                         if (((Event)checkEvent).getDistance() == 0){
@@ -75,8 +73,8 @@ public class Query extends Message
             } break;
 
             case HOMING:{
-                //todo: if we are in Homing mode, did we reach back to our home node / is the stack empty
                 if (currentNode.equals(this.originNode)){
+                    //todo query needs to remove itself from the resendQuery List
                     System.out.printf("Event at x: %d y %d, at time %d, id %d \n",
                             this.destNode.getX(),
                             this.destNode.getY(),

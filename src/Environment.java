@@ -181,8 +181,6 @@ public class Environment
                 node.newQuery(item.getEventId());
             }
 
-
-
         }
     }
 

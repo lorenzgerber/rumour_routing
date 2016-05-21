@@ -26,31 +26,7 @@ public class Node
     private boolean busyState;
     private HashMap<Event, Integer> eventMap;
     private Queue<Message> messageQueue;
-
-    public Node(int nodeId,
-                Position position,
-                int currentTime,
-                double probAgent,
-                int ttlAgent,
-                int ttlQuery,
-                int periodQuery,
-                int numRecentNodes)
-    {
-
-        this.neighbourIds = new ArrayList<Node>();
-        this.eventMap = new HashMap<Event, Integer>();
-        this.messageQueue = new LinkedList<Message>();
-        this.position = position;
-        this.probAgent = probAgent;
-        this.ttlAgent = ttlAgent;
-        this.periodQuery = periodQuery;
-        this.ttlQuery = ttlQuery;
-        this.numRecentNodes = numRecentNodes;
-
-    }
-
-
-
+    // todo queryResendList
 
     /**
      * Constructor without periodQuery
@@ -163,15 +139,17 @@ public class Node
         if(this.messageQueue.isEmpty())
             return;
 
+        // todo do we need to resend a Query
+        // todo check time compare to query resend list
+        // todo if entry with current time is found create new query
+        // todo for event of current time in queryResend list
+
         // do message action
         this.messageQueue.element().messageAction(this);
 
         // check TTL of Message if zero, remove
         if(!this.messageQueue.element().checkTTL())
         {
-            if ( this.messageQueue.element() instanceof Query ){
-                //System.out.println("A Query just died");
-            }
             this.messageQueue.remove();
             return;
         }
@@ -182,12 +160,16 @@ public class Node
             this.sendMessage(nextNode);
         }
 
+        this.currentTime++;
 
 
     }
 
     public void newQuery(int eventId){
         this.messageQueue.add(new Query(this.ttlQuery, eventId, this, this.numRecentNodes));
+        // todo here needs to add the query to queryResendList.
+        // todo Calculate time form current time and ttlQuery
+        // todo get the Query object reference and store it.
     }
 
     public void sendMessage(Node destination)
