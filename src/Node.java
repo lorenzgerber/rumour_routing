@@ -55,7 +55,7 @@ public class Node
     /**
      * Constructor without periodQuery
      * @param position object of type Position that determines location of Node by x/y coordinates
-     * @param probAgent probability value between 0 and 1. Probability that an agent is created after occurence
+     * @param probAgent probability value between 0 and 1. Probability that an agent is created after occurrence
      *                  of an event
      */
     public Node(int nodeId,
@@ -65,6 +65,25 @@ public class Node
                 int ttlAgent,
                 int numRecentNodes)
     {
+
+        // Exception Handling
+
+        if (nodeId < 0)
+            throw new IllegalArgumentException("nodeId can't be negative");
+
+        if (currentTime < 0)
+            throw new IllegalArgumentException("currentTime can't be negative");
+
+        if (probAgent > 1 || probAgent < 0)
+            throw new IllegalArgumentException("probabilities must be a number between 0 and 1");
+
+        if (ttlAgent < 0)
+            throw new IllegalArgumentException("TTL's can't be negative");
+
+        if (numRecentNodes < 0)
+            throw new IllegalArgumentException("numRecentNodes can't be negative");
+
+
         this.nodeId = nodeId;
         this.neighbourIds = new ArrayList<Node>();
         this.eventMap = new HashMap<Event, Integer>();
