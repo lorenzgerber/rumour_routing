@@ -111,8 +111,7 @@ public class Node
 
     public Deque<Message> getMessageQueue(){ return this.messageQueue; }
 
-    public HashMap getEventMap(){ return this.eventMap; }
-
+    public HashMap<Event, Integer> getEventMap(){ return this.eventMap; }
 
     public void detectNeighbour(Node node)
     {
