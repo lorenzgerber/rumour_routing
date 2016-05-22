@@ -37,6 +37,10 @@ public class Query extends Message
 
     }
 
+    public int getQueryEventId(){
+        return this.queryEventId;
+    }
+
     public void resetTTL(){
         this.TTL = 0;
     }
@@ -74,6 +78,7 @@ public class Query extends Message
 
             case HOMING:{
                 if (currentNode.equals(this.originNode)){
+                    currentNode.removeQueryFromResend(this);
                     //todo query needs to remove itself from the resendQuery List
                     System.out.printf("Event at x: %d y %d, at time %d, id %d \n",
                             this.destNode.getX(),

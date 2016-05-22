@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Queue;
+import java.util.Deque;
 import java.util.LinkedList;
 
 /**
@@ -20,13 +20,14 @@ public class Node
     public int ttlAgent;
     public int periodQuery;
     public int ttlQuery;
+    public int queryResendWait;
     private int nodeId;
     private int numRecentNodes;
     private ArrayList<Node> neighbourIds;
     private boolean busyState;
     private HashMap<Event, Integer> eventMap;
-    private Queue<Message> messageQueue;
-    // todo queryResendList
+    private Deque<Message> messageQueue;
+    private HashMap<Integer, Query> queryResendMap;
 
     /**
      * Constructor without periodQuery
@@ -64,6 +65,7 @@ public class Node
         this.neighbourIds = new ArrayList<Node>();
         this.eventMap = new HashMap<Event, Integer>();
         this.messageQueue = new LinkedList<Message>();
+        this.queryResendMap = new HashMap<Integer, Query>();
         this.position = position;
         this.probAgent = probAgent;
         this.ttlAgent = ttlAgent;
@@ -78,6 +80,10 @@ public class Node
 
     public void setTTLQuery(int ttlQuery){
         this.ttlQuery = ttlQuery;
+    }
+
+    public void setQueryResendWait(int time){
+        this.queryResendWait = time;
     }
 
     public int getNodeId(){
@@ -103,7 +109,7 @@ public class Node
 
     public ArrayList<Node> getNeighbourIds(){ return this.neighbourIds; }
 
-    public Queue<Message> getMessageQueue(){ return this.messageQueue; }
+    public Deque<Message> getMessageQueue(){ return this.messageQueue; }
 
     public HashMap getEventMap(){ return this.eventMap; }
 
@@ -139,10 +145,14 @@ public class Node
         if(this.messageQueue.isEmpty())
             return;
 
-        // todo do we need to resend a Query
-        // todo check time compare to query resend list
-        // todo if entry with current time is found create new query
-        // todo for event of current time in queryResend list
+        // Check if a due Query is in the resendQuery Map. If so resend the Query
+        // todo In the current implementation just one resend is requested. This could be
+        // todo implemented more generic in the future to have number of resends as parameter
+        if(this.queryResendMap.containsKey(this.currentTime)){
+            Integer eventId = this.queryResendMap.remove(this.currentTime).getQueryEventId();
+            this.messageQueue.add(new Query(this.ttlQuery, eventId, this, this.numRecentNodes));
+        }
+
 
         // do message action
         this.messageQueue.element().messageAction(this);
@@ -167,9 +177,7 @@ public class Node
 
     public void newQuery(int eventId){
         this.messageQueue.add(new Query(this.ttlQuery, eventId, this, this.numRecentNodes));
-        // todo here needs to add the query to queryResendList.
-        // todo Calculate time form current time and ttlQuery
-        // todo get the Query object reference and store it.
+        this.queryResendMap.put(this.currentTime + this.queryResendWait, (Query) this.messageQueue.getLast());
     }
 
     public void sendMessage(Node destination)
@@ -187,6 +195,10 @@ public class Node
         message.reduceTTL();
         message.addRecentNodeId(this.nodeId);
         this.busyState = true;
+    }
+
+    public void removeQueryFromResend(Query removeQuery){
+        this.queryResendMap.values().remove(removeQuery);
     }
 
 }

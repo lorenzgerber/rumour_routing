@@ -69,6 +69,16 @@ public class Environment
         this.nodeList.get(noNodes).setTTLQuery(ttlQuery);
     }
 
+    /**
+     * Set Query Resend Wait time for Node with number
+     * 'noNode' in the environment.
+     * @param noNode
+     * @param waitTime
+     */
+    public void setQueryResendTime(int noNode, int waitTime) {
+        this.nodeList.get(noNode).setQueryResendWait(waitTime);
+    }
+
 
     /**
      * getter for current Time

@@ -23,6 +23,7 @@ public class RumourRoutingApp
         int QUERY_PERIODICITY       = 400;
         int TIMESTEPS               = 10000;
         int NUMBER_OF_RECENT_NODES  = 5;
+        int QUERY_RESEND_WAIT       = TTL_QUERY *8;
 
         // Counters
         int nodeIdCounter = 0;
@@ -79,6 +80,7 @@ public class RumourRoutingApp
         {
             myEnv.setPeriodQuery(noQueryNode, QUERY_PERIODICITY);
             myEnv.setTTLQuery(noQueryNode, TTL_QUERY);
+            myEnv.setQueryResendTime(noQueryNode, QUERY_RESEND_WAIT);
         }
 
         // Create Neighbour List
