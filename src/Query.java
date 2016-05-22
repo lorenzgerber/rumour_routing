@@ -15,7 +15,7 @@ public class Query extends Message
 {
     private int queryEventId;
     private Stack<Node> route;
-    private enum queryMode {SEARCH, TRACK, HOMING};
+    public enum queryMode {SEARCH, TRACK, HOMING};
     private queryMode activeMode;
     private Node originNode;
     private Node destNode;
