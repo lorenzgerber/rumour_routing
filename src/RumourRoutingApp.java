@@ -16,8 +16,8 @@ public class RumourRoutingApp
         double NEW_EVENTS           = 0.0001;
         int NODE_RANGE              = 15;
         double PROB_AGENT           = 0.5;
-        int TTL_AGENT               = 45;
-        int TTL_QUERY               = 50;
+        int TTL_AGENT               = 50;
+        int TTL_QUERY               = 45;
         int QUERY_NODES             = 4;
         int QUERY_PERIODICITY       = 400;
         int TIMESTEPS               = 10000;
