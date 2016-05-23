@@ -15,16 +15,24 @@ import static junit.framework.TestCase.assertNotNull;
  */
 public class EnvironmentTest
 {
+    private int temp;
 
     /**
+<<<<<<< HEAD
+     * A test to try and create an environment.
+=======
      * Test to see
+>>>>>>> 911b8214b74ec26c47dc9ba7e047f6d2c2ec33d8
      */
     @Test
-    public void testConstructor() throws Exception {
+    public void testConstructor() {
         double envProb = 0.5;
         assertNotNull(new Environment(envProb));
     }
 
+    /**
+     * A test that tries to calculate the distance and shows that the distance equation works.
+     */
     @Test
     public void testNeighbourInit() {
         int numberOfNodes = 1;
@@ -49,12 +57,20 @@ public class EnvironmentTest
         }
     }
 
+    /**
+     * A test that tries to get environment time, test also shows that time increases in the advance time method.
+     * @throws Exception
+     */
     @Test
     public void testGetTime() throws Exception {
         Environment env = new Environment(0.5);
         env.advanceTime();
         assertEquals(env.getTime(),1);
     }
+
+    /**
+     * A test to add a node an ArrayList.
+     */
     @Test
     public void testAddNode(){
         ArrayList<Node> nodeList = new ArrayList<>();
@@ -63,23 +79,25 @@ public class EnvironmentTest
         assertNotNull(nodeList);
     }
 
+    /**
+     * A test to add an event to an ArrayList.
+     */
     @Test
     public void testRandomEvent(){
         ArrayList<Event> eventList = new ArrayList<>();
         Node node = new Node(3,new Position(3,4),5,0.5,10,3);
         Event newEvent = new Event(2, 15);
-        // Test to add an event to the node. Random function is a built in function in intellij so no need to be tested.
+        //Random function is a built in function in intellij so no need to be tested.
         eventList.add(newEvent);
         assertNotNull(eventList);
 
     }
 
+    /**
+     * A test that shows that the random generator works and that it's added to the eventList.
+     */
     @Test
     public void testPeriodQuery(){
-        double prob = 0.5;
-        Node node = new Node(3,new Position(3,4),5,prob,10,3);
-        int time = 12;
-        int temp = 3;
         ArrayList<Event> eventList = new ArrayList<>();
         Event event = new Event(5,5);
         eventList.add(event);
