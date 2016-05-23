@@ -31,8 +31,12 @@ public class Agent extends Message
 
     }
 
+<<<<<<< HEAD
+    public void messageAction(Node currentNode) throws Exception {
+=======
     public void messageAction(Node currentNode)
     {
+>>>>>>> caa89496228d5330379f6ce751704cb58f1006c6
         HashMap<Event, Integer> nodeEvents = currentNode.getEventMap();
         // cycling through the Routing map of the Agent
         for( Event agentEventKey : this.routingMap.keySet()){
@@ -44,7 +48,7 @@ public class Agent extends Message
                             {
                                 nodeEvents.put((Event)agentEventKey.clone(), this.routingMap.get(agentEventKey));
                             } catch(CloneNotSupportedException e){
-                                System.out.println("cloning problem");
+                                throw new CloneNotSupportedException("cloning problem");
                             }
 
                         }
@@ -54,7 +58,7 @@ public class Agent extends Message
                 try {
                     nodeEvents.put((Event)agentEventKey.clone(), this.routingMap.get(agentEventKey));
                 } catch (CloneNotSupportedException e) {
-                    System.out.println("cloning problem");
+                    throw  new CloneNotSupportedException("cloning problem");
                 }
             }
 
@@ -70,7 +74,7 @@ public class Agent extends Message
                             {
                                 this.routingMap.put((Event)nodeEventKey.clone(), nodeEvents.get(nodeEventKey));
                             } catch(CloneNotSupportedException e){
-                                System.out.println("cloning problem");
+                                throw new CloneNotSupportedException("cloning problem");
                             }
 
                         }
@@ -81,7 +85,7 @@ public class Agent extends Message
                 try{
                     this.routingMap.put((Event) nodeEventKey.clone(), nodeEvents.get(nodeEventKey));
                 } catch (CloneNotSupportedException e){
-                    System.out.println("cloning problem");
+                    throw new CloneNotSupportedException("cloning problem");
                 }
             }
         }

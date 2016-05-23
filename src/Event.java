@@ -10,7 +10,7 @@ public class Event
     private int zeroTime;
     private int distance;
 
-    public Event(int id, int zeroTime)
+    public Event(int i, int id, int zeroTime)
     {
         this.id = id;
         this.zeroTime = zeroTime;

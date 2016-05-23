@@ -2,6 +2,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+<<<<<<< HEAD
+import static junit.framework.TestCase.assertNotNull;
+
+/**
+ * Created by loge on 11/05/16.
+ */
+public class NodeTest
+{
+
+=======
 public class NodeTest
 {
     /**
@@ -80,5 +90,6 @@ public class NodeTest
         Node node = new Node(nodeId, new Position(3, 5) , currentTime, probAgent, ttlAgent, numRecentSteps);
         assertNotNull(node);
     }
+>>>>>>> caa89496228d5330379f6ce751704cb58f1006c6
 }
 

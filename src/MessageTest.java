@@ -5,6 +5,7 @@ import sun.font.TrueTypeFont;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
@@ -13,6 +14,20 @@ import static junit.framework.TestCase.assertTrue;
  */
 public class MessageTest
 {
+    @Test
+    public void testConstructor(){
+        assertNotNull(new Message(5,6) {
+            @Override
+            public void onSendAction() {
+
+            }
+
+            @Override
+            public void messageAction(Node node) {
+
+            }
+        });
+    }
     @Test
     public void checkTTL() throws Exception {
         int TTL = 0;
@@ -40,36 +55,14 @@ public class MessageTest
     }
 
     @Test
-    public void addRecentNodeId(int nodeid) throws Exception {
+    public void addRecentNodeId() throws Exception {
+        Integer nodeid = 5;
 
         Deque<Integer> recentNodes;
         recentNodes = new LinkedList<Integer>();
+
         recentNodes.add(nodeid);
         assertEquals(recentNodes.contains(nodeid), true);
-
-
-
-    }
-
-    @Test
-    public void getRecentNodes() throws Exception {
-        int numRecentNodes;
-
-
-    }
-
-    @Test
-    public void messageAction() throws Exception {
-
-    }
-
-    @Test
-    public void nextNode() throws Exception {
-
-    }
-
-    @Test
-    public void onSendAction() throws Exception {
 
     }
 

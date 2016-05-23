@@ -7,8 +7,7 @@ import java.util.Collections;
  */
 public class RumourRoutingApp
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws Exception {
 
         // Setting Parameters
         int NODES_X                 = 50;
@@ -17,7 +16,7 @@ public class RumourRoutingApp
         double NEW_EVENTS           = 0.0001;
         int NODE_RANGE              = 15;
         double PROB_AGENT           = 0.5;
-        int TTL_AGENT               = 10;
+        int TTL_AGENT               = 45;
         int TTL_QUERY               = 50;
         int QUERY_NODES             = 4;
         int QUERY_PERIODICITY       = 400;

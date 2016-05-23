@@ -41,7 +41,7 @@ public abstract class Message
         this.TTL--;
     }
 
-    /*
+    /**
     * Adds already visted nodes to a list called recentNodes.
     * @param nodeId - int the id number of the node.
     */
@@ -59,12 +59,17 @@ public abstract class Message
         return this.recentNodes;
     }
 
+<<<<<<< HEAD
+
+    public abstract void onSendAction();
+=======
     /**
      *
      */
     public void messageAction(Node currentNode){
 
     }
+>>>>>>> caa89496228d5330379f6ce751704cb58f1006c6
 
     /**
     * @param currentNode- Node the current node.
@@ -74,8 +79,5 @@ public abstract class Message
         return currentNode;
     }
 
-    public void onSendAction(){
-
-    }
-
+    public abstract void messageAction(Node node) throws Exception;
 }
