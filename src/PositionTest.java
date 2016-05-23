@@ -4,11 +4,16 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * Created by loge on 11/05/16.
+ * PositionTest
+ *
+ * Tests Position
  */
 
 public class PositionTest
 {
+    /**
+     * Checks if getX is able to get values
+     */
     @Test
     public void testGetX()
     {
@@ -16,6 +21,9 @@ public class PositionTest
         assertTrue(pos.getX() == 7);
     }
 
+    /**
+     * Checks if getY is able to get values
+     */
     @Test
     public void testGetY()
     {
