@@ -61,7 +61,8 @@ public class RumourRoutingApp
                         PROB_AGENT,
                         TTL_AGENT,
                         NUMBER_OF_RECENT_NODES));
-                // todo should implement in environment a check that no nodes with the same id can be put into the array list
+                // todo should implement in environment a check that no nodes with the same
+                // todo id can be put into the array list
                 nodeIdCounter++;
             }
         }
