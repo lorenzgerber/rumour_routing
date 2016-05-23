@@ -64,7 +64,6 @@ public abstract class Message
 
 
 
-
     /**
     * @param currentNode- Node the current node.
     */
