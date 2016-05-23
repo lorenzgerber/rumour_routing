@@ -10,10 +10,15 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 /**
- * Created by loge on 11/05/16.
+ * MessageTest
+ *
+ * Tests Message
  */
 public class MessageTest
 {
+    /**
+     * Checks if the constructor is Null
+     */
     @Test
     public void testConstructor(){
         assertNotNull(new Message(5,6) {
@@ -28,6 +33,11 @@ public class MessageTest
             }
         });
     }
+
+    /**
+     * Checks if the ttl know what's true and false
+     * about death
+     */
     @Test
     public void checkTTL() throws Exception {
         int TTL = 0;
@@ -43,7 +53,9 @@ public class MessageTest
         assertEquals(temp, temp2);
     }
 
-
+    /**
+     * Checks if ttl is able to go lose a step
+     */
     @Test
     public void reduceTTL() throws Exception {
         int temp = 50;
@@ -54,6 +66,9 @@ public class MessageTest
 
     }
 
+    /**
+     * Checks if recent nodes are put into the recent nodes list
+     */
     @Test
     public void addRecentNodeId() throws Exception {
         Integer nodeid = 5;
