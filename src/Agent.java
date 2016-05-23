@@ -31,12 +31,7 @@ public class Agent extends Message
 
     }
 
-<<<<<<< HEAD
     public void messageAction(Node currentNode) throws Exception {
-=======
-    public void messageAction(Node currentNode)
-    {
->>>>>>> caa89496228d5330379f6ce751704cb58f1006c6
         HashMap<Event, Integer> nodeEvents = currentNode.getEventMap();
         // cycling through the Routing map of the Agent
         for( Event agentEventKey : this.routingMap.keySet()){

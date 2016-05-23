@@ -54,7 +54,7 @@ public class EnvironmentTest
     public void testRandomEvent(){
         ArrayList<Event> eventList = new ArrayList<>();
         Node node = new Node(3,new Position(3,4),5,0.5,10,3);
-        Event newEvent = new Event(0, 2, 15);
+        Event newEvent = new Event(2, 15);
         // Test to add an event to the node. Random function is a built in function in intellij so no need to be tested.
         eventList.add(newEvent);
         assertNotNull(eventList);
@@ -68,7 +68,7 @@ public class EnvironmentTest
         int time = 12;
         int temp = 3;
         ArrayList<Event> eventList = new ArrayList<>();
-        Event event = new Event(2,5,5);
+        Event event = new Event(5,5);
         eventList.add(event);
 
         Random randomGenerator = new Random();
