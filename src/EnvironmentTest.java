@@ -18,11 +18,7 @@ public class EnvironmentTest
     private int temp;
 
     /**
-<<<<<<< HEAD
      * A test to try and create an environment.
-=======
-     * Test to see
->>>>>>> 911b8214b74ec26c47dc9ba7e047f6d2c2ec33d8
      */
     @Test
     public void testConstructor() {
