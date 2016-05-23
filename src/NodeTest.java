@@ -12,7 +12,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import static junit.framework.TestCase.assertNotNull;
-
+/**
+ * NodeTest
+ *
+ * Tests for Node
+ */
 
 public class NodeTest
 {
@@ -94,9 +98,8 @@ public class NodeTest
         assertNotNull(node);
     }
 
-
     @Test
-    public void testGetNodId(){
+    public void testGetNodeId(){
         assertEquals(node.getNodeId(),1);
     }
 
@@ -111,12 +114,19 @@ public class NodeTest
         assertEquals(node.getBusyState(), false);
     }
 
+    /**
+     * Test to see detectNeighbour indeed is able to
+     */
     @Test
     public void testDetectNeighbour(){
         ArrayList <Node> neighbourIds = new ArrayList<Node>();
         neighbourIds.add(node);
         assertEquals(neighbourIds.contains(node), true);
     }
+
+    /**
+     * Test to see detectEvent indeed is able to
+     */
 
     @Test
     public void testDetectEvent() throws CloneNotSupportedException {
@@ -133,6 +143,9 @@ public class NodeTest
 
     }
 
+    /**
+     * Test to see detectAgent indeed is able to
+     */
 
     @Test
     public void testDetectAgent() {
@@ -147,6 +160,9 @@ public class NodeTest
         assertEquals(messageQueue.contains(agent), true);
     }
 
+    /**
+     * Test to see detectQuery indeed is able to
+     */
     @Test
     public void testDetectQuery() {
         Event event = new Event(1,5);
@@ -161,6 +177,9 @@ public class NodeTest
 
     }
 
+    /**
+     * Test to see if sendMessage is able to send a query
+     */
     @Test
     public void testSendMessage() {
         Event event = new Event(1, 5);

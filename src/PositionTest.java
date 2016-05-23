@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * PositionTest
  *
- * Tests Position
+ * Tests for Position
  */
 
 public class PositionTest

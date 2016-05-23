@@ -9,11 +9,16 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 /**
- * Created by loge on 11/05/16.
+ * EnvironmentTest
+ *
+ * Tests for Environment
  */
 public class EnvironmentTest
 {
 
+    /**
+     * Test to see
+     */
     @Test
     public void testConstructor() throws Exception {
         double envProb = 0.5;

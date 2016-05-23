@@ -6,6 +6,12 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**
+ * QueryTest
+ *
+ * Tests for Query
+ */
+
 public class QueryTest
 {
     /**
@@ -69,6 +75,10 @@ public class QueryTest
         assertNotNull(Query.queryMode.HOMING);
     }
 
+    /**
+     * Test to see if getQueryEventId gets the right ID
+     */
+
     @Test
     public void testGetQueryEventId(){
         Node node = new Node(1, new Position(5,6),10,0.5,10,5);
@@ -76,6 +86,9 @@ public class QueryTest
         assertEquals(query.getQueryEventId(),1);
     }
 
+    /**
+     * Test to see if resetTTL really resets
+     */
     @Test
     public void testResetTTL(){
         Message message = new Message(10,5) {
@@ -102,6 +115,9 @@ public class QueryTest
         assertEquals(query.checkTTL(),false);
     }
 
+    /**
+     * Test to see if checkEvent can recognize an event in a node
+     */
     @Test
     public void testCheckEvent() throws CloneNotSupportedException {
         Node node = new Node(1, new Position(5,6),10,0.5,10,5);
