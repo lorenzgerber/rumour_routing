@@ -1,13 +1,13 @@
-import junit.framework.TestCase;
+
 import org.junit.Test;
-import sun.font.TrueTypeFont;
+
 
 import java.util.Deque;
 import java.util.LinkedList;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+
 
 /**
  * Created by loge on 11/05/16.
