@@ -94,24 +94,8 @@ public class Query extends Message
 
     }
 
-    public void onSendAction() {
-        switch (activeMode) {
-            case SEARCH: {
+    public void onSendAction(){}
 
-            }
-            case TRACK: {
-
-            }
-            case HOMING: {
-                //while (!route.empty()) {
-
-                    //nextNode(route.pop());
-
-                //}
-            }
-
-        }
-    }
     public Node nextNode(Node currentNode) {
         switch (activeMode){
             case SEARCH: {
