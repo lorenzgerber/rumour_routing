@@ -8,17 +8,23 @@ import java.util.Random;
 import static junit.framework.TestCase.assertNotNull;
 
 /**
- * Created by loge on 11/05/16.
+ * EnvironmentTest
+ *
+ * Test for Environment
  */
 public class EnvironmentTest
 {
-
+    /**
+     * Checks if the constructor is Null
+     */
     @Test
     public void testConstructor() throws Exception {
         double envProb = 0.5;
         assertNotNull(new Environment(envProb));
     }
-
+    /**
+     * Checks if distance is Null
+     */
     @Test
     public void testNeighbourInit() {
         int numberOfNodes = 1;
@@ -42,6 +48,10 @@ public class EnvironmentTest
             }
         }
     }
+
+    /**
+     * Checks in addNode if nodelist is Null
+     */
     @Test
     public void testAddNode(){
         ArrayList<Node> nodeList = new ArrayList<>();
@@ -50,6 +60,9 @@ public class EnvironmentTest
         assertNotNull(nodeList);
     }
 
+    /**
+     * Checks in randomEvent if the eventlist is Null
+     */
     @Test
     public void testRandomEvent(){
         ArrayList<Event> eventList = new ArrayList<>();
@@ -61,6 +74,9 @@ public class EnvironmentTest
 
     }
 
+    /**
+     * Checks if periodQuery generates a Null random event
+     */
     @Test
     public void testPeriodQuery(){
         double prob = 0.5;
