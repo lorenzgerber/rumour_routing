@@ -1,5 +1,5 @@
-import junit.framework.Assert;
-import org.junit.Before;
+
+
 import org.junit.Test;
 
 import java.util.Deque;
@@ -9,37 +9,33 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 /**
- * AgentTest
- *
- * Tests for Agent
+ * Created by loge on 11/05/16.
  */
 public class AgentTest
 {
-    /**
-     * Tests if the constructor is Null
-     */
+
+    private Deque<Integer> recentNodes;
+
     @Test
     public void testConstructor(){
         assertNotNull(new Agent(5,new Event(7,1),7,10));
 
     }
 
-    /**
-     * Tests if clone supports exception
-     */
 
-    @Test(expected = CloneNotSupportedException.class)
+    @Test
     public void testMessageAction() throws CloneNotSupportedException {
         Node currentNode = new Node(1, new Position(2,5),5, 0.5,10,3);
         Event event = new Event(3,6);
         currentNode.detectEvent(event);
         HashMap<Event, Integer> nodeEvents = currentNode.getEventMap();
         nodeEvents.put((Event) event.clone(),1);
+        assertEquals(nodeEvents.containsValue(1), true);
+
+
+
         }
 
-    /**
-     * Checks if newdistance is equal to the increased eventdistance
-     */
     @Test
     public void testUpdateRoutingMapEventDist(){
         Event eventdistance = new Event(1,6);
@@ -49,9 +45,6 @@ public class AgentTest
 
     }
 
-    /**
-     * Checks that routingMap is not null
-     */
     @Test
     public void testUpdateRoutingMap(){
         HashMap<Event, Integer> routingMap = new HashMap<>();
@@ -62,4 +55,8 @@ public class AgentTest
 
         assertNotNull(routingMap);
     }
+
+
+
+
 }

@@ -5,26 +5,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 /**
- * EnvironmentTest
- *
- * Test for Environment
+ * Created by loge on 11/05/16.
  */
 public class EnvironmentTest
 {
-    /**
-     * Checks if the constructor is Null
-     */
+
     @Test
     public void testConstructor() throws Exception {
         double envProb = 0.5;
         assertNotNull(new Environment(envProb));
     }
-    /**
-     * Checks if distance is Null
-     */
+
     @Test
     public void testNeighbourInit() {
         int numberOfNodes = 1;
@@ -49,9 +44,12 @@ public class EnvironmentTest
         }
     }
 
-    /**
-     * Checks in addNode if nodelist is Null
-     */
+    @Test
+    public void testGetTime() throws Exception {
+        Environment env = new Environment(0.5);
+        env.advanceTime();
+        assertEquals(env.getTime(),1);
+    }
     @Test
     public void testAddNode(){
         ArrayList<Node> nodeList = new ArrayList<>();
@@ -60,9 +58,6 @@ public class EnvironmentTest
         assertNotNull(nodeList);
     }
 
-    /**
-     * Checks in randomEvent if the eventlist is Null
-     */
     @Test
     public void testRandomEvent(){
         ArrayList<Event> eventList = new ArrayList<>();
@@ -74,9 +69,6 @@ public class EnvironmentTest
 
     }
 
-    /**
-     * Checks if periodQuery generates a Null random event
-     */
     @Test
     public void testPeriodQuery(){
         double prob = 0.5;

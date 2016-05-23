@@ -10,15 +10,10 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 /**
- * MessageTest
- *
- * Tests Message
+ * Created by loge on 11/05/16.
  */
 public class MessageTest
 {
-    /**
-     * Checks if the constructor is Null
-     */
     @Test
     public void testConstructor(){
         assertNotNull(new Message(5,6) {
@@ -33,11 +28,6 @@ public class MessageTest
             }
         });
     }
-
-    /**
-     * Checks if the ttl know what's true and false
-     * about death
-     */
     @Test
     public void checkTTL() throws Exception {
         int TTL = 0;
@@ -53,9 +43,7 @@ public class MessageTest
         assertEquals(temp, temp2);
     }
 
-    /**
-     * Checks if ttl is able to go lose a step
-     */
+
     @Test
     public void reduceTTL() throws Exception {
         int temp = 50;
@@ -66,9 +54,6 @@ public class MessageTest
 
     }
 
-    /**
-     * Checks if recent nodes are put into the recent nodes list
-     */
     @Test
     public void addRecentNodeId() throws Exception {
         Integer nodeid = 5;
@@ -78,6 +63,45 @@ public class MessageTest
 
         recentNodes.add(nodeid);
         assertEquals(recentNodes.contains(nodeid), true);
+
+    }
+
+    @Test
+    public void testGetRecentNode(){
+        Message message = new Message(5,6) {
+            @Override
+            public void onSendAction() {
+
+            }
+
+            @Override
+            public void messageAction(Node node) throws Exception {
+
+            }
+        };
+        Deque<Integer> recentNode;
+        recentNode = new LinkedList<Integer>();
+        recentNode.add(50);
+        message.addRecentNodeId(50);
+
+        assertEquals(message.getRecentNodes(),recentNode);
+    }
+
+    @Test
+    public void testNextNode(){
+        Message message = new Message(5,7) {
+            @Override
+            public void onSendAction() {
+
+            }
+
+            @Override
+            public void messageAction(Node node) throws Exception {
+
+            }
+        };
+        Node node = new Node(1, new Position(5,6),10,0.5,10,3);
+        assertEquals(message.nextNode(node), node);
 
     }
 
