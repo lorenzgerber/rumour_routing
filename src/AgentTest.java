@@ -9,19 +9,24 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 /**
- * Created by loge on 11/05/16.
+ * AgentTest
+ *
+ * Tests for Agent
  */
 public class AgentTest
 {
-
-    private Deque<Integer> recentNodes;
-
+    /**
+     * Tests if the constructor is Null
+     */
     @Test
     public void testConstructor(){
         assertNotNull(new Agent(5,new Event(7,1),7,10));
 
     }
 
+    /**
+     * Tests if clone supports exception
+     */
 
     @Test(expected = CloneNotSupportedException.class)
     public void testMessageAction() throws CloneNotSupportedException {
@@ -30,10 +35,11 @@ public class AgentTest
         currentNode.detectEvent(event);
         HashMap<Event, Integer> nodeEvents = currentNode.getEventMap();
         nodeEvents.put((Event) event.clone(),1);
-
-
         }
 
+    /**
+     * Checks if newdistance is equal to the increased eventdistance
+     */
     @Test
     public void testUpdateRoutingMapEventDist(){
         Event eventdistance = new Event(1,6);
@@ -43,6 +49,9 @@ public class AgentTest
 
     }
 
+    /**
+     * Checks that routingMap is not null
+     */
     @Test
     public void testUpdateRoutingMap(){
         HashMap<Event, Integer> routingMap = new HashMap<>();
@@ -53,8 +62,4 @@ public class AgentTest
 
         assertNotNull(routingMap);
     }
-
-
-
-
 }
